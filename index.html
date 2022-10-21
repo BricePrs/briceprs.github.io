@@ -7,18 +7,21 @@
   <link rel="icon" href="misc/logo.jpg"/>
   <link rel="stylesheet" href="stylesheets/default.css"/>
   <script src="lib/simple_cube.js" defer></script>
+  <script src="lib/salut.js" defer></script>
 </head>
 <body>
 
   <header>
-    <a href="index.html" title="Home page" id="home-button">Brice Peres</a>
+    <a href="index.html?reload=RELOAD_ON_SAVE" title="Home page" id="home-button">Brice Peres</a>
     <nav>
-      <a href="site/Projects/projects.html" title="Show projects">Projects</a>
-      <a href="site/Education/education.html" title="Show education">Education</a>
+      <a href="Projects/projects.html?reload=RELOAD_ON_SAVE" title="Show projects">Projects</a>
+      <a href="Education/education.html?reload=RELOAD_ON_SAVE" title="Show education">Education</a>
     </nav>
   </header>
 
   <main>
+    <button>Hey pssst. Clique ici ;)</button>
+    <div id="spawner"></div>
     <canvas id="my_Canvas"></canvas>
   </main>
   <footer>

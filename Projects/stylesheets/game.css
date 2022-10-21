@@ -1,0 +1,55 @@
+#Game * {
+    color: #eeeeee;
+    padding-bottom: 5px;
+}
+
+#Game {
+    margin-top: 1%;
+    border-radius: 15px;
+    background-color: crimson;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#Game h1 {
+    font-family: Roboto, serif;
+    font-size: 32px;
+    color: #eeeeee;
+}
+
+#Game p {
+    margin: 0.2em;
+    font-family: Roboto, serif;
+    font-size: 18px;
+    color: #eeeeee;
+}
+
+#Game span {
+    margin: 0.2em;
+    font-family: Roboto, serif;
+    font-size: 15px;
+    color: #eeeeee;
+}
+
+#Game div {
+    margin: 1.0em;
+    font-family: Roboto, serif;
+    font-size: 15px;
+    color: #191919;
+}
+
+#Game input {
+    color: #191919;
+    border-radius: 7px;
+}
+
+#Game button {
+    font-size: 14px;
+    border-radius: 5px;
+    color: #191919;
+    margin: 0 0 0 5px;
+    padding: 2px 5px 2px 5px;
+}

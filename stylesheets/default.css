@@ -4,13 +4,19 @@
   src: url("../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
+html {
+    background-color: #191919;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
 
 header {
-    top: 0px;
-    left: 0px;
     width: 100%;
     display: flex;
-    background-color: #111111;
+    background-color: #191919;
     position: fixed;
     padding-top: 0.1%;
     padding-bottom: 0.1%;
@@ -44,4 +50,26 @@ nav * {
     font-size: 30px;
     padding: 5px 5px 10px 10px;
     border-radius: 20px;
+}
+
+main {
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+button {
+    font-family: "Roboto", serif;
+    color: #e6ccb6;
+    background-color: white;
+    font-weight: normal;
+    text-decoration: None;
+    font-size: 30px;
+    margin-left: 10px;
+    padding: 5px 5px 10px 10px;
+    border-radius: 20px;
+}
+
+p {
+    color: #e6decf;
+    font-size: 10px;
 }
