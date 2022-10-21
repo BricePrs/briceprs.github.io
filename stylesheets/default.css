@@ -1,0 +1,47 @@
+
+@font-face {
+  font-family: Roboto;
+  src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+
+header {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    background-color: #111111;
+    position: fixed;
+    padding-top: 0.1%;
+    padding-bottom: 0.1%;
+    justify-content: space-between;
+    height: 50px;
+}
+
+#home-button {
+    font-family: "Roboto", serif;
+    color: #e6ccb6;
+    font-weight: normal;
+    text-decoration: None;
+    font-size: 30px;
+    margin-left: 10px;
+    padding: 5px 5px 10px 10px;
+    border-radius: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 20px;
+}
+
+nav * {
+    margin-left: 20px;
+    font-family: "Roboto", serif;
+    color: #e6decf;
+    font-weight: normal;
+    text-decoration: None;
+    font-size: 30px;
+    padding: 5px 5px 10px 10px;
+    border-radius: 20px;
+}
