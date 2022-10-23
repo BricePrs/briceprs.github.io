@@ -1,8 +1,18 @@
 
+const aspect_ratio = 16/9;
+
+function onWindowResize(event) {
+    canvas.setAttribute('width', window.innerWidth.toString());
+    canvas.setAttribute('height', (window.innerWidth/aspect_ratio).toString());
+}
+
 /*============= Creating a canvas =================*/
  var canvas = document.getElementById('my_Canvas');
- canvas.setAttribute('width', '1900');
- canvas.setAttribute('height', '1000');
+canvas.setAttribute('width', window.innerWidth.toString());
+canvas.setAttribute('height', (window.innerWidth/aspect_ratio).toString());
+
+window.addEventListener("resize", onWindowResize)
+
  gl = canvas.getContext('experimental-webgl');
 
  /*============ Defining and storing the geometry =========*/
