@@ -1,15 +1,16 @@
 
-const aspect_ratio = 16/9;
+
+const body_main = document.getElementsByTagName("main")[0];
 
 function onWindowResize(event) {
-    canvas.setAttribute('width', window.innerWidth.toString());
-    canvas.setAttribute('height', (window.innerWidth/aspect_ratio).toString());
+    canvas.setAttribute('width', body_main.offsetWidth.toString());
+    canvas.setAttribute('height', body_main.offsetHeight.toString());
 }
 
 /*============= Creating a canvas =================*/
  var canvas = document.getElementById('my_Canvas');
-canvas.setAttribute('width', window.innerWidth.toString());
-canvas.setAttribute('height', (window.innerWidth/aspect_ratio).toString());
+canvas.setAttribute('width', body_main.offsetWidth.toString());
+canvas.setAttribute('height', body_main.offsetHeight.toString());
 
 window.addEventListener("resize", onWindowResize)
 

@@ -18,16 +18,22 @@
   src: url("../../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
+
 html {
     background-color: #191919;
+}
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: clip;
 }
 
 header {
     width: 100%;
     display: flex;
     position: fixed;
-    padding-top: 0.1%;
-    padding-bottom: 1.0%;
+    padding-bottom: 8px;
     justify-content: space-between;
     height: auto;
 }
@@ -58,7 +64,6 @@ nav {
     scale: 60%;
     padding: 0 10px 0 0;
 }
-
 nav * {
     margin-right: 20px;
     font-family: "Roboto", serif;
@@ -71,6 +76,7 @@ nav * {
 }
 
 @media screen and (max-width: 500px) {
+
     header {
         display: flex;
         flex-direction: column;
@@ -86,10 +92,10 @@ nav * {
         background-color: #191919;
         display: flex;
         flex-direction: column;
-        transition: all .2s ease-out;
     }
 
     nav[state=hidden] {
+        transition: all .2s ease-out;
         transform: translateY(-100px);
     }
 
@@ -97,19 +103,15 @@ nav * {
         transform: translateY(0);
     }
 
+
     #nav-list {
         display: initial;
-        animation-name: a_rotate;
-        animation-iteration-count: 1;
-        animation-timing-function: ease-out;
-        animation-duration: 0.3s;
     }
-
-
     nav * {
         margin-left: 20px;
     }
 }
+
 
 
 
@@ -130,7 +132,6 @@ button {
     border-radius: 20px;
 }
 
-body {
-    padding: 0;
-    margin: 0;
+main {
+    height: calc(100% - 59px);
 }
