@@ -13,6 +13,17 @@
     }
 }
 
+@keyframes a_smoothscale {
+    from {
+        transform: translate(-100%, -50%);
+        scale: 0;
+    }
+    to {
+        transform: translate(0);
+        scale: 100%;
+    }
+}
+
 @font-face {
   font-family: Roboto;
   src: url("../../fonts/Roboto-Regular.ttf") format("truetype");
@@ -45,7 +56,7 @@ nav {
 
 #home-button {
     font-family: "Roboto", serif;
-    background: linear-gradient(60deg, #ff3428, blueviolet);
+    background: linear-gradient(0.2turn, #ff3428, blueviolet);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: normal;
@@ -54,7 +65,7 @@ nav {
     margin-left: 10px;
     padding: 10px 5px 5px 10px;
     border-radius: 20px;
-    transition: all 1s ease;
+    animation: a_smoothscale 0.4s ease-out;
 }
 
 #top-bar {
@@ -62,21 +73,37 @@ nav {
     justify-content: space-between;
 }
 
+#top-bar:hover {
+    transform: translateY(-2px);
+    transition: all 0.1s ease;
+}
+
 #nav-list {
     display: none;
     scale: 60%;
     padding: 0 10px 0 0;
 }
+
 nav * {
     margin-right: 20px;
     font-family: "Roboto", serif;
-    color: #e6decf;
+
+    background: linear-gradient(-0.55turn, #002d5e, #30eec2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
     font-weight: normal;
     text-decoration: None;
     font-size: 25px;
     padding: 10px 5px 5px 10px;
     border-radius: 20px;
 }
+
+nav *:hover {
+    transform: translateY(-2px);
+    transition: all 0.1s ease;
+}
+
 
 @media screen and (max-width: 500px) {
 
@@ -98,13 +125,12 @@ nav * {
     }
 
 
-    nav[state=start] {
+    nav {
         transform: translateY(-100px);
     }
 
     nav[state=hidden] {
         transition: all .2s ease-out;
-        transform: translateY(-100px);
     }
 
     nav[state=shown] {
