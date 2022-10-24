@@ -45,13 +45,16 @@ nav {
 
 #home-button {
     font-family: "Roboto", serif;
-    color: #e6ccb6;
+    background: linear-gradient(60deg, #ff3428, blueviolet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: normal;
     text-decoration: None;
     font-size: 30px;
     margin-left: 10px;
     padding: 10px 5px 5px 10px;
     border-radius: 20px;
+    transition: all 1s ease;
 }
 
 #top-bar {
@@ -94,12 +97,18 @@ nav * {
         flex-direction: column;
     }
 
+
+    nav[state=hidden] {
+        transform: translateY(-100px);
+    }
+
     nav[state=hidden] {
         transition: all .2s ease-out;
         transform: translateY(-100px);
     }
 
     nav[state=shown] {
+        transition: all .2s ease-out;
         transform: translateY(0);
     }
 

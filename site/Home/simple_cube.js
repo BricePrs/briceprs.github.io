@@ -74,7 +74,7 @@ window.addEventListener("resize", onWindowResize)
  var fragCode = 'precision mediump float;'+
     'varying vec3 vColor;'+
     'void main(void) {'+
-       'gl_FragColor = vec4(vColor, 1.);'+
+       'gl_FragColor = vec4(1.);'+
     '}';
 
  var vertShader = gl.createShader(gl.VERTEX_SHADER);
@@ -196,7 +196,7 @@ window.addEventListener("resize", onWindowResize)
     gl.uniformMatrix4fv(Vmatrix, false, view_matrix);
     gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.drawElements(gl.LINES, indices.length, gl.UNSIGNED_SHORT, 0);
 
     window.requestAnimationFrame(animate);
  }
