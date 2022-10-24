@@ -15,7 +15,7 @@ let gl = canvas.getContext('experimental-webgl');
 
 /* GEOMETRY */
 
-const VERTICES_COUNT = 10000;
+const VERTICES_COUNT = 10_000;
 let vertices = [];
 
 for (let i = 0; i < 3*VERTICES_COUNT; i++) {
@@ -37,9 +37,26 @@ var vertex_code = "" +
     "" +
     "attribute vec3 a_vertexPos;" +
     "" +
+    "mat2 rotate(float ang) {" +
+    "   return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));" +
+    "}" +
     "" +
     "void main() {" +
-    "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, 0.01*time+scroll_amount, 0),2.)-1.;" +
+    "   float transi1 = -1.5;" +
+    "   float transi2 = 8.5;" +
+    "   float space_pos = .7*time+scroll_amount*5.;" +
+    "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
+    "   float mix_amount = pow(smoothstep(transi1, transi1+5., space_pos),8.);" +
+    "   vec3 anchor_pos = mod_vertexPos;" +
+    "   anchor_pos.xy = (floor(anchor_pos.xy)+vec2(.5))*0.6;" +
+    "   float angle = anchor_pos.z*((space_pos-transi1-8.)*5.);" +
+    "   anchor_pos.xy = rotate(angle) * anchor_pos.xy;" +
+    "   float mix_regu = smoothstep(0., 2., angle*angle);" +
+    "" +
+    "" +
+    "   float ray_mult = 1.+(0.2*sin(5.*time+(space_pos-transi2)*atan(anchor_pos.x/anchor_pos.y)*anchor_pos.y/abs(anchor_pos.y)))*smoothstep(transi2, transi2+2., space_pos);" +
+    "" +
+    "   mod_vertexPos.xy = mix(mod_vertexPos.xy, anchor_pos.xy*ray_mult, mix_amount*((1.-mix_regu)+mix_regu*pow(1.-0.5*anchor_pos.z, .4)));" +
     "   gl_Position = projection * view * vec4(mod_vertexPos, 1.);" +
     "   gl_PointSize = 5.*pow((mod_vertexPos.z+1.)*.5, 1.);" +
     "}";
