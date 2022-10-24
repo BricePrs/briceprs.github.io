@@ -98,7 +98,7 @@ nav * {
     }
 
 
-    nav[state=hidden] {
+    nav[state=start] {
         transform: translateY(-100px);
     }
 
