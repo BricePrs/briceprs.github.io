@@ -70,6 +70,7 @@ gl.useProgram(shaderProgram);
 var uLoc_projection = gl.getUniformLocation(shaderProgram, "projection");
 var uLoc_view = gl.getUniformLocation(shaderProgram, "view");
 var uLoc_model = gl.getUniformLocation(shaderProgram, "model");
+
 var uLoc_time = gl.getUniformLocation(shaderProgram, "time");
 var uLoc_scroll_amount = gl.getUniformLocation(shaderProgram, "scroll_amount");
 
@@ -137,9 +138,9 @@ var animate = function(time) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 
-    let zoom = 0.7;
+    let zoom = 0.5;
     let aspect_ratio = canvas.width/canvas.height;
-    let proj_matrix = get_perspective(zoom, zoom/aspect_ratio, 1., 10);
+    let proj_matrix = get_perspective(zoom*aspect_ratio, zoom, 1., 10);
     model_matrix = rotateZ(time*0.00001);
 
     gl.uniformMatrix4fv(uLoc_projection, false, proj_matrix);
