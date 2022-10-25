@@ -149,7 +149,7 @@ view_matrix[14] = view_matrix[14]-1;
 /* Render Loop */
 
 let scroll_speed = 0;
-let scroll_amount = 1;
+let scroll_amount = 0;
 let scroll_drag = 0.98;
 let scroll_sensitivity = 0.003;
 var previous_time = 0;
