@@ -41,10 +41,17 @@ var vertex_code = "" +
     "   return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));" +
     "}" +
     "" +
+    "vec3 project_onto_torus(vec3 p) {" +
+    "   vec3 pp = vec3(p.x, 0, p.z);" +
+    "   pp = normalize(pp);" +
+    "   return pp+0.3*normalize(p-pp);" +
+    "}" +
+    "" +
     "void main() {" +
     "   float transi1 = -1.5;" +
     "   float transi2 = 8.5;" +
-    "   float space_pos = .7*time+scroll_amount*5.;" +
+    "   float transi3 = 12.5;" +
+    "   float space_pos = .3*time+scroll_amount*5.;" +
     "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
     "   float mix_amount = pow(smoothstep(transi1, transi1+5., space_pos),8.);" +
     "   vec3 anchor_pos = mod_vertexPos;" +
@@ -54,9 +61,16 @@ var vertex_code = "" +
     "   float mix_regu = smoothstep(0., 2., angle*angle);" +
     "" +
     "" +
-    "   float ray_mult = 1.+(0.2*sin(5.*time+(space_pos-transi2)*atan(anchor_pos.x/anchor_pos.y)*anchor_pos.y/abs(anchor_pos.y)))*smoothstep(transi2, transi2+2., space_pos);" +
-    "" +
+    "   float PI = 3.141592;" +
+    "   float sign = anchor_pos.y/abs(anchor_pos.y);" +
+    "   angle = atan(anchor_pos.x/anchor_pos.y)+PI*(1.+sign)*.5;" +
+    "   float ray_mult = 1.+(0.1*sin(5.*time+2.85*PI*angle))*smoothstep(transi2, transi2+2., space_pos);" +
     "   mod_vertexPos.xy = mix(mod_vertexPos.xy, anchor_pos.xy*ray_mult, mix_amount*((1.-mix_regu)+mix_regu*pow(1.-0.5*anchor_pos.z, .4)));" +
+    "" +
+    "   vec3 torus = project_onto_torus(a_vertexPos*2.);" +
+    "   torus.yz *=rotate(space_pos*smoothstep(transi3, transi3+2., space_pos));" +
+    "   torus.xy *=rotate(space_pos*0.2+time*0.1*smoothstep(transi3, transi3+2., space_pos));" +
+    "   mod_vertexPos = mix(mod_vertexPos, torus*0.35+vec3(0, 0, -0.5), smoothstep(transi3, transi3+2., space_pos));" +
     "   gl_Position = projection * view * vec4(mod_vertexPos, 1.);" +
     "   gl_PointSize = 5.*pow((mod_vertexPos.z+1.)*.5, 1.);" +
     "}";
@@ -135,7 +149,7 @@ view_matrix[14] = view_matrix[14]-1;
 /* Render Loop */
 
 let scroll_speed = 0;
-let scroll_amount = 0;
+let scroll_amount = 1;
 let scroll_drag = 0.98;
 let scroll_sensitivity = 0.003;
 var previous_time = 0;
