@@ -49,10 +49,10 @@ var vertex_code = "" +
     "" +
     "void main() {" +
     "   float transi1 = -1.5;" +
-    "   float transi2 = 5.5;" +
+    "   float transi2 = 6.5;" +
     "   float transi3 = 12.5;" +
     "   float transi4 = 19.5;" +
-    "   float space_pos = fract((.4*time+scroll_amount)/24.)*24.;" +
+    "   float space_pos = fract((.7*time+scroll_amount)/24.)*24.;" +
     "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
     "   float mix_amount = pow(smoothstep(transi1, transi1+5., space_pos),8.);" +
     "   vec3 anchor_pos = mod_vertexPos;" +
