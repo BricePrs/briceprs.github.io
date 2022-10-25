@@ -49,7 +49,7 @@ var vertex_code = "" +
     "" +
     "void main() {" +
     "   float transi1 = -1.5;" +
-    "   float transi2 = 8.5;" +
+    "   float transi2 = 5.5;" +
     "   float transi3 = 12.5;" +
     "   float transi4 = 19.5;" +
     "   float space_pos = fract((.4*time+scroll_amount)/24.)*24.;" +
