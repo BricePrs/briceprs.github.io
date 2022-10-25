@@ -11,7 +11,7 @@ canvas.setAttribute('height', body_main.offsetHeight.toString());
 
 
 // Get context
-let gl = canvas.getContext('experimental-webgl');
+let gl = canvas.getContext('experimental-webgl', {preserveDrawingBuffer: true});
 
 /* GEOMETRY */
 
@@ -51,7 +51,7 @@ var vertex_code = "" +
     "   float transi1 = -1.5;" +
     "   float transi2 = 8.5;" +
     "   float transi3 = 12.5;" +
-    "   float space_pos = .3*time+scroll_amount*5.;" +
+    "   float space_pos = .4*time+scroll_amount*5.;" +
     "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
     "   float mix_amount = pow(smoothstep(transi1, transi1+5., space_pos),8.);" +
     "   vec3 anchor_pos = mod_vertexPos;" +
@@ -159,14 +159,11 @@ var animate = function(time) {
     previous_time = time;
 
     // Setting up draw context
-    gl.enable(gl.DEPTH_TEST);
-    gl.depthFunc(gl.LESS);
 
     gl.clearColor(0.1, 0.1, 0.1, 1.0);
-    gl.clearDepth(1.0);
 
     gl.viewport(0.0, 0.0, canvas.width, canvas.height);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
 
     let zoom = 0.5;
