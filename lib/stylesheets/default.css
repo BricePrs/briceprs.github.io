@@ -170,3 +170,14 @@ button {
 main {
     height: calc(100% - 59px);
 }
+
+#text {
+    position: fixed;
+    top: 200px;
+    background: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: invert(1) grayscale(1);
+    -webkit-filter: invert(1) grayscale(1);
+}
