@@ -47,6 +47,7 @@ header {
     padding-bottom: 8px;
     justify-content: space-between;
     height: auto;
+    background-color: #191919;
 }
 
 nav {
@@ -110,6 +111,7 @@ nav *:hover {
     header {
         display: flex;
         flex-direction: column;
+        background-color: initial;
     }
 
     #top-bar {

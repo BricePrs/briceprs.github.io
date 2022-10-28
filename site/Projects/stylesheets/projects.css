@@ -11,30 +11,38 @@ body {
     all: unset;
 }
 
+
 .project-list {
-    justify-content: space-around;
+    justify-content: space-between;
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .project {
-    background-color: #f3f3f3;
+    background-color: #202020;
     padding: 20px 20px 20px 20px;
-    margin: 20px 5% 20px 5%;
+    margin: 20px 10px 20px 10px;
     width: auto;
-    border-radius: 1px;
+    border-radius: 4px;
 }
 
 .project h1 {
-    color: #1c0305;
+    color: #f3eedd;
     font-size: 30px;
 }
+
+.project h2 {
+    color: #f3eedd;
+    font-size: 16px;
+}
 .project * {
-    color: #1c0305;
+    color: #f3eedd;
     font-size: 12px;
 }
 
 .project img {
-    max-width: 500px;
+    max-width: 85%;
     height: auto;
     margin: 10px 10px 10px 10px;
 }
