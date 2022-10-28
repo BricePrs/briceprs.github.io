@@ -1,0 +1,54 @@
+
+@font-face {
+  font-family: Roboto;
+  src: url("../../fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+* {
+    font-family: Roboto, serif;
+}
+body {
+    all: unset;
+}
+
+.project-list {
+    justify-content: space-around;
+    display: flex;
+}
+
+.project {
+    background-color: #f3f3f3;
+    padding: 20px 20px 20px 20px;
+    margin: 20px 5% 20px 5%;
+    width: auto;
+    border-radius: 1px;
+}
+
+.project h1 {
+    color: #1c0305;
+    font-size: 30px;
+}
+.project * {
+    color: #1c0305;
+    font-size: 12px;
+}
+
+.project img {
+    max-width: 500px;
+    height: auto;
+    margin: 10px 10px 10px 10px;
+}
+
+.project-descr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.double {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #f3f3f3;
+}
