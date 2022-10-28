@@ -132,8 +132,8 @@ var vertex_code = "" +
     "   mod_vertexPos = mix(mod_vertexPos, torus*0.35+vec3(0, 0, -0.5), smoothstep(transi3, transi3+2., space_pos));" +
     "   vec3 mod_vertexPos2 = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
     "   mod_vertexPos = mix(mod_vertexPos, mod_vertexPos2, smoothstep(transi4, transi4+2., space_pos));" +
-    "   mod_vertexPos.xz *= rotate(mouse_pos.x*0.3);" +
-    "   mod_vertexPos.yz *= rotate(mouse_pos.y*0.3);" +
+    "   mod_vertexPos.xz *= rotate(mouse_pos.x*0.1);" +
+    "   mod_vertexPos.yz *= rotate(mouse_pos.y*0.1);" +
     "   gl_Position = projection * view * vec4(mod_vertexPos, 1.);" +
     "   gl_PointSize = 5.*pow((mod_vertexPos.z+1.)*.5, 1.);" +
     "}";
