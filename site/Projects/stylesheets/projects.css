@@ -16,11 +16,12 @@ body {
     display: flex;
     flex-wrap: wrap;
     z-index: 2;
+    column-gap: 4%;
 }
 
 .project {
     background-color: #202020BB;
-    max-width: 500px;
+    max-width: 60%;
     padding: 20px 20px 20px 20px;
     margin: 20px 10px 20px 10px;
     border-style: solid;
@@ -55,7 +56,9 @@ body {
 }
 
 .project img {
-    max-width: 300px;
+    max-width: 40%;
+    min-width: 250px;
+    width: auto;
     height: auto;
     margin: 10px 10px 10px 10px;
 }

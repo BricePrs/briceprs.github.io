@@ -9,6 +9,13 @@ var canvas = document.getElementById('my_Canvas');
 canvas.setAttribute('width', canvas.offsetWidth.toString());
 canvas.setAttribute('height', canvas.offsetHeight.toString());
 
+function set_up_texture() {
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.offsetWidth, canvas.offsetHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+}
 
 // Get context
 let gl = canvas.getContext('webgl2', {
@@ -80,11 +87,7 @@ gl.linkProgram(renderProgram);
 
 var tex = gl.createTexture();
 gl.bindTexture(gl.TEXTURE_2D, tex);
-gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.offsetWidth, canvas.offsetHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+set_up_texture()
 
 
 var framebuffer = gl.createFramebuffer();
@@ -97,11 +100,7 @@ gl.bindTexture(gl.TEXTURE_2D, null);
 
 var copy_tex = gl.createTexture();
 gl.bindTexture(gl.TEXTURE_2D, copy_tex);
-gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.offsetWidth, canvas.offsetHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+set_up_texture()
 
 
 var copy_framebuffer = gl.createFramebuffer();
@@ -153,59 +152,127 @@ var uLoc_erase_speed = gl.getUniformLocation(copy_shaderProgram, "erase_speed");
 
 
 /* SHADERS */
-var vertex_code = "" +
-    "uniform vec2 mouse_pos;" +
-    "uniform mat4 projection;" +
-    "uniform mat4 view;" +
-    "uniform mat4 model;" +
-    "" +
-    "uniform float time;" +
-    "uniform float scroll_amount;" +
-    "" +
-    "attribute vec3 a_vertexPos;" +
-    "" +
-    "mat2 rotate(float ang) {" +
-    "   return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));" +
-    "}" +
-    "" +
-    "vec3 project_onto_torus(vec3 p) {" +
-    "   vec3 pp = vec3(p.x, 0, p.z);" +
-    "   pp = normalize(pp);" +
-    "   return pp+0.3*normalize(p-pp);" +
-    "}" +
-    "" +
-    "void main() {" +
-    "   float transi1 = -1.5;" +
-    "   float transi2 = 8.5;" +
-    "   float transi3 = 10.5;" +
-    "   float transi4 = 19.5;" +
-    "   float space_pos = fract((0.03*time+scroll_amount)/24.)*24.;" +
-    "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
-    "   float mix_amount = pow(smoothstep(transi1, transi1+5., space_pos),8.);" +
-    "   vec3 anchor_pos = mod_vertexPos;" +
-    "   anchor_pos.xy = (floor(anchor_pos.xy)+vec2(.5))*0.6;" +
-    "   float angle = anchor_pos.z*((space_pos-transi1-8.)*5.);" +
-    "   anchor_pos.xy = rotate(angle) * anchor_pos.xy;" +
-    "   float mix_regu = smoothstep(0., 2., angle*angle);" +
-    "" +
-    "" +
-    "   float PI = 3.141592;" +
-    "   float sign = anchor_pos.y/abs(anchor_pos.y);" +
-    "   angle = atan(anchor_pos.x/anchor_pos.y)+PI*(1.+sign)*.5;" +
-    "   float ray_mult = 1.+(0.1*sin(5.*time+2.85*PI*angle))*smoothstep(transi2, transi2+2., space_pos);" +
-    "   mod_vertexPos.xy = mix(mod_vertexPos.xy, anchor_pos.xy*ray_mult, mix_amount*((1.-mix_regu)+mix_regu*pow(1.-0.5*anchor_pos.z, .4)));" +
-    "" +
-    "   vec3 torus = project_onto_torus(a_vertexPos*1.8);" +
-    "   torus.yz *=rotate(3.*space_pos);" +
-    "   torus.xy *=rotate(2.*space_pos*0.2+time*0.1);" +
-    "   mod_vertexPos = mix(mod_vertexPos, torus*0.35+vec3(0, 0, -0.5), smoothstep(transi3, transi3+2., space_pos));" +
-    "   vec3 mod_vertexPos2 = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
-    "   mod_vertexPos = mix(mod_vertexPos, mod_vertexPos2, smoothstep(transi4, transi4+2., space_pos));" +
-    "   mod_vertexPos.xz *= rotate(mouse_pos.x*0.1);" +
-    "   mod_vertexPos.yz *= rotate(mouse_pos.y*0.1);" +
-    "   gl_Position = projection * view * vec4(mod_vertexPos, 1.);" +
-    "   gl_PointSize = 5.*pow((mod_vertexPos.z+1.)*.5, 1.);" +
-    "}";
+var vertex_code = "uniform vec2 mouse_pos;\n" +
+    "uniform mat4 projection;\n" +
+    "uniform mat4 view;\n" +
+    "uniform mat4 model;\n" +
+    "\n" +
+    "uniform float time;\n" +
+    "uniform float scroll_amount;\n" +
+    "\n" +
+    "attribute vec3 a_vertexPos;\n" +
+    "\n" +
+    "#define PI 3.141592\n" +
+    "#define NBR_OF_ANIM 6\n" +
+    "\n" +
+    "mat2 rotate(float ang) {\n" +
+    "   return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));\n" +
+    "}\n" +
+    "\n" +
+    "float local_anim_time(float time, float anim_start, float anim_end) {\n" +
+    "    return (time - anim_start)/(anim_end - anim_start);\n" +
+    "}\n" +
+    "\n" +
+    "vec3 swap_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area) {\n" +
+    "    return mix(a, b, smoothstep(swp_time-swap_area, swp_time+swap_area, anim_time));\n" +
+    "}\n" +
+    "\n" +
+    "vec3 project_onto_torus(vec3 p) {\n" +
+    "   vec3 pp = vec3(p.x, 0, p.z);\n" +
+    "   pp = normalize(pp);\n" +
+    "   return pp+0.3*normalize(p-pp);\n" +
+    "}\n" +
+    "\n" +
+    "vec3 dust_cloud(vec3 vertex_pos, float anim_time) {\n" +
+    "   vec3 mod_vertexPos = mod(vertex_pos+vec3(0, anim_time*4., 0),2.)-1.;\n" +
+    "   return mod_vertexPos;\n" +
+    "}\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "vec3 weird_circle(vec3 vertex_pos, float anim_time) {\n" +
+    "    vec3 anchor_pos = vertex_pos;\n" +
+    "    anchor_pos.xy = (floor(vertex_pos.xy)+vec2(.5))*0.6;\n" +
+    "\n" +
+    "    float angle = vertex_pos.z*(anim_time-.5)*50.;\n" +
+    "    float mix_amount = mix(0., vertex_pos.z*.2, smoothstep(0., 0.1, (anim_time-.5)*(anim_time-.5)));\n" +
+    "    anchor_pos.xy = rotate(angle) * anchor_pos.xy;\n" +
+    "\n" +
+    "    float sign = anchor_pos.y/abs(anchor_pos.y);\n" +
+    "    angle = atan(anchor_pos.x/ anchor_pos.y)+PI*(1.+sign)*.5;\n" +
+    "\n" +
+    "    float max_spike_count = 9.;\n" +
+    "    float spike_count = max(0., floor((anim_time-.5)*2.*max_spike_count));\n" +
+    "\n" +
+    "    float prev_ray_mult = 1.+(0.1*sin(1.*time+angle*spike_count));\n" +
+    "    float next_ray_mult = 1.+(0.1*sin(1.*time+angle*(spike_count+1.)));\n" +
+    "    float ray = mix(prev_ray_mult, next_ray_mult, smoothstep(0., 1., fract(max(0., anim_time-.5)*2.*max_spike_count)));\n" +
+    "\n" +
+    "    anchor_pos.xy *= ray;\n" +
+    "\n" +
+    "    vec3 mod_vertex_pos = mix(anchor_pos, vertex_pos, mix_amount);\n" +
+    "\n" +
+    "   return mod_vertex_pos;\n" +
+    "}\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "vec3 torus(vec3 vertex_pos, float anim_time) {\n" +
+    "    vec3 torus_pos = project_onto_torus(vertex_pos * 1.8);\n" +
+    "    torus_pos.yz *= rotate(10. * anim_time);\n" +
+    "    torus_pos.xy *= rotate(7. * anim_time * 0.2 + time * 0.1);\n" +
+    "    return torus_pos*.4+vec3(0, 0, -0.5);\n" +
+    "}\n" +
+    "\n" +
+    "void main() {\n" +
+    "\n" +
+    "    float ANIM_DUR[NBR_OF_ANIM];\n" +
+    "    ANIM_DUR[0] = 5.0;\n" +
+    "    ANIM_DUR[1] = 13.0;\n" +
+    "    ANIM_DUR[2] = 6.0;\n" +
+    "    ANIM_DUR[3] = 6.0;\n" +
+    "    ANIM_DUR[4] = 0.0;\n" +
+    "\n" +
+    "    float anim_swp_area[NBR_OF_ANIM];\n" +
+    "    anim_swp_area[0] = 0.5;\n" +
+    "    anim_swp_area[1] = 1.0;\n" +
+    "    anim_swp_area[2] = 1.5;\n" +
+    "    anim_swp_area[3] = 1.3;\n" +
+    "    anim_swp_area[4] = 0.5;\n" +
+    "\n" +
+    "    float anim_swp_time[NBR_OF_ANIM];\n" +
+    "\n" +
+    "    float total_duration = 0.;\n" +
+    "    for (int i = 0; i < NBR_OF_ANIM; i++) {\n" +
+    "        anim_swp_time[i] = total_duration;\n" +
+    "        total_duration += ANIM_DUR[i];\n" +
+    "    }\n" +
+    "\n" +
+    "    float anim_time = fract((0.03 * time + scroll_amount) / total_duration) * total_duration;\n" +
+    "\n" +
+    "    vec3 dust_cloud_pos = dust_cloud(a_vertexPos, local_anim_time(anim_time, anim_swp_time[0], anim_swp_time[1]));\n" +
+    "    vec3 mod_vertexPos = dust_cloud_pos;\n" +
+    "\n" +
+    "    float weird_circle_time = local_anim_time(anim_time, anim_swp_time[1], anim_swp_time[2]);\n" +
+    "    vec3 weird_circle_pos = weird_circle(dust_cloud_pos, weird_circle_time);\n" +
+    "    mod_vertexPos = swap_vec3(dust_cloud_pos, weird_circle_pos, anim_time, anim_swp_time[1], anim_swp_area[1]);\n" +
+    "\n" +
+    "    float torus_time = local_anim_time(anim_time, anim_swp_time[2], anim_swp_time[3]);\n" +
+    "    vec3 torus_pos = torus(a_vertexPos, torus_time);\n" +
+    "    mod_vertexPos = swap_vec3(mod_vertexPos, torus_pos, anim_time, anim_swp_time[2], anim_swp_area[2]);\n" +
+    "\n" +
+    "    mod_vertexPos = swap_vec3(mod_vertexPos, dust_cloud_pos, anim_time, anim_swp_time[3], anim_swp_area[3]);\n" +
+    "\n" +
+    "    mod_vertexPos.xz *= rotate(mouse_pos.x * 0.1);\n" +
+    "    mod_vertexPos.yz *= rotate(mouse_pos.y * 0.1);\n" +
+    "\n" +
+    "    gl_Position = projection * view * vec4(mod_vertexPos, 1.);\n" +
+    "    gl_PointSize = 5. * pow((mod_vertexPos.z + 1.) * .5, 1.);\n" +
+    "}\n" +
+    "\n" +
+    "\n";
+
+// MAKE SPARKS
 
 var fragment_code = "" +
     "precision mediump float;" +
@@ -316,6 +383,8 @@ gl.bindBuffer(gl.ARRAY_BUFFER, null);
 let scroll_speed = 0;
 let scroll_amount = 0;
 let scroll_drag = 0.98;
+let max_scroll_speed = 5.;
+
 let mouse_pos = [0, 0];
 
 let max_attenuation = 0.91;
@@ -323,7 +392,7 @@ let attenuation = 0.0;
 let attenuation_sensitivity = 0.003;
 let attenuation_drag = 0.999;
 
-let scroll_sensitivity = 0.003;
+let scroll_sensitivity = 0.01;
 var previous_time = 0;
 
 gl.clearColor(0.1, 0.1, 0.1, 1.);
@@ -343,6 +412,8 @@ var animate = function(time) {
     // COPY BUFFER
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, copy_framebuffer);
+    gl.viewport(0.0, 0.0, canvas.offsetWidth, canvas.offsetHeight);
+
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
@@ -365,6 +436,8 @@ var animate = function(time) {
 
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+    gl.viewport(0.0, 0.0, canvas.offsetWidth, canvas.offsetHeight);
+
     gl.clear(gl.COLOR_BUFFER_BIT);
 
 
@@ -390,16 +463,16 @@ var animate = function(time) {
     // Setting up draw context
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+    gl.viewport(0.0, 0.0, canvas.offsetWidth, canvas.offsetHeight);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
-    gl.viewport(0.0, 0.0, canvas.width, canvas.height);
     gl.useProgram(shaderProgram);
     gl.vertexAttribPointer(uLoc_vertexPos, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(uLoc_vertexPos);
 
     let zoom = 0.5;
-    let aspect_ratio = canvas.width/canvas.height;
+    let aspect_ratio = canvas.offsetWidth/canvas.offsetHeight;
     let proj_matrix = get_perspective(zoom*aspect_ratio, zoom, 1., 10);
     model_matrix = rotateZ(time*0.00001);
 
@@ -420,6 +493,8 @@ var animate = function(time) {
 
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0.0, 0.0, canvas.offsetWidth, canvas.offsetHeight);
+
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
@@ -427,7 +502,7 @@ var animate = function(time) {
 
     gl.uniform1i(uLoc_render_tex, 0);
     gl.uniform1f(uLoc_aspect_ratio, aspect_ratio);
-    gl.uniform1f(uLoc_radius, 0.15+scroll_speed/30.);
+    gl.uniform1f(uLoc_radius, 0.15+scroll_speed/60.);
     gl.uniform1f(uLoc_quadtime, time*0.001);
     gl.uniform2f(uLoc_mouse_pos, mouse_pos[0], mouse_pos[1]);
 
@@ -447,6 +522,23 @@ var animate = function(time) {
 function onWindowResize(event) {
     canvas.setAttribute('width', body_main.offsetWidth.toString());
     canvas.setAttribute('height', body_main.offsetHeight.toString());
+
+    gl.deleteTexture(tex);
+    tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    set_up_texture();
+
+    gl.deleteTexture(copy_tex);
+    copy_tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, copy_tex);
+    set_up_texture();
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, copy_framebuffer);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, copy_tex, 0);
+
 }
 
 window.onmousewheel=document.onmousewheel=mouseScroll;
@@ -457,6 +549,7 @@ if(document.addEventListener){
 
 function mouseScroll(e) {
     scroll_speed += e.deltaY*scroll_sensitivity;
+    scroll_speed = Math.max(Math.min(scroll_speed, max_scroll_speed), -max_scroll_speed);
     console.log(e.deltaY*scroll_sensitivity);
 }
 
