@@ -5,14 +5,19 @@ const body_main = document.getElementsByTagName("main")[0];
 /* CANVAS SET UP */
 
 var canvas = document.getElementById('my_Canvas');
-document.querySelector('canvas').style.cursor = "none";
 
-canvas.setAttribute('width', body_main.offsetWidth.toString());
-canvas.setAttribute('height', body_main.offsetHeight.toString());
+canvas.setAttribute('width', canvas.offsetWidth.toString());
+canvas.setAttribute('height', canvas.offsetHeight.toString());
 
 
 // Get context
-let gl = canvas.getContext('experimental-webgl');
+let gl = canvas.getContext('webgl2', {
+    antialias: false,
+    depth: false,
+    failIfMajorPerformanceCaveat: true,
+    powerPreference: "high-performance",
+    preserveDrawingBuffer: true,
+});
 
 /* Framebuffer */
 
@@ -44,10 +49,20 @@ var render_fragment_code = "" +
     "uniform float time;" +
     "varying vec2 uv;" +
     "" +
-    "void main() {" +
-    "   vec3 color = texture2D(raw_scene, uv).rgb;" +
+    "vec3 get_color(vec2 pos) {" +
+    "   vec3 color = texture2D(raw_scene, pos).rgb;" +
     "   vec3 invert_color = vec3(1.)-color;" +
-    "   gl_FragColor = vec4(mix(color, 1.2*invert_color, smoothstep(radius+0.01, radius, .04*sin(time)+length(vec2(aspect_ratio, 1.)*uv-vec2(0.98, 0.56)-mouse_pos)*3.)), 1.);" +
+    "   vec3 raw_color = mix(color, 1.2*invert_color, smoothstep(radius+0.01, radius, .04*sin(time)+length(vec2(aspect_ratio, 1.)*pos-mouse_pos)*3.));" +
+    "   return raw_color;" +
+    "}" +
+    "" +
+    "void main() {" +
+    "   float dist = pow(length(uv-vec2(.5)), 4.)/20.;" +
+    "   vec2 red = uv+vec2(.4, .1)*dist;" +
+    "   vec2 blue = uv+vec2(-.2, -.5)*dist;" +
+    "   vec2 green = uv+vec2(-.4, .2)*dist;" +
+    "   vec3 aber_chrom = vec3(get_color(red).r,get_color(blue).b,get_color(green).g);" +
+    "   gl_FragColor = vec4(aber_chrom, 1.);" +
     "}";
 
 var render_vertex_shader = gl.createShader(gl.VERTEX_SHADER);
@@ -78,9 +93,63 @@ gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex
 
 gl.bindTexture(gl.TEXTURE_2D, null);
 
+/* COPY BUFFER */
 
-/* GEOMETRY */
+var copy_tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, copy_tex);
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.offsetWidth, canvas.offsetHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
+
+var copy_framebuffer = gl.createFramebuffer();
+gl.bindFramebuffer(gl.FRAMEBUFFER, copy_framebuffer);
+gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, copy_tex, 0);
+
+gl.bindTexture(gl.TEXTURE_2D, null);
+
+var copy_vertex_code = "" +
+    "attribute vec2 a_quadPos;" +
+    "attribute vec2 a_uv;" +
+    "" +
+    "varying vec2 uv;" +
+    "" +
+    "void main() {" +
+    "   gl_Position = vec4(a_quadPos*2., 0., 1.);" +
+    "   uv = a_uv;" +
+    "}";
+
+var copy_fragment_code = "" +
+    "precision mediump float;" +
+    "uniform sampler2D raw_scene;" +
+    "uniform float erase_speed;" +
+    "varying vec2 uv;" +
+    "" +
+    "void main() {" +
+    "   gl_FragColor = vec4(mix(vec3(0.1), texture2D(raw_scene, uv).rgb, erase_speed), 1.);" +
+    "}";
+
+var copy_vertex_shader = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(copy_vertex_shader, copy_vertex_code)
+gl.compileShader(copy_vertex_shader);
+
+var copy_fragment_shader = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(copy_fragment_shader, copy_fragment_code)
+gl.compileShader(copy_fragment_shader);
+
+var copy_shaderProgram = gl.createProgram();
+gl.attachShader(copy_shaderProgram, copy_vertex_shader);
+gl.attachShader(copy_shaderProgram, copy_fragment_shader);
+gl.linkProgram(copy_shaderProgram);
+
+gl.useProgram(copy_shaderProgram);
+
+var uLoc_copy_uv = gl.getAttribLocation(copy_shaderProgram, "a_uv");
+var uLoc_copy_render_tex = gl.getUniformLocation(copy_shaderProgram, "raw_scene");
+var uLoc_copy_quadPos = gl.getAttribLocation(copy_shaderProgram, "a_quadPos");
+var uLoc_erase_speed = gl.getUniformLocation(copy_shaderProgram, "erase_speed");
 
 
 /* SHADERS */
@@ -107,8 +176,8 @@ var vertex_code = "" +
     "" +
     "void main() {" +
     "   float transi1 = -1.5;" +
-    "   float transi2 = 6.5;" +
-    "   float transi3 = 12.5;" +
+    "   float transi2 = 8.5;" +
+    "   float transi3 = 10.5;" +
     "   float transi4 = 19.5;" +
     "   float space_pos = fract((0.03*time+scroll_amount)/24.)*24.;" +
     "   vec3 mod_vertexPos = mod(a_vertexPos+vec3(0, space_pos, 0),2.)-1.;" +
@@ -163,7 +232,7 @@ gl.linkProgram(shaderProgram);
 gl.useProgram(shaderProgram);
 
 
-const VERTICES_COUNT = 30_000;
+const VERTICES_COUNT = 10_000;
 let vertices = [];
 
 for (let i = 0; i < 3*VERTICES_COUNT; i++) {
@@ -249,25 +318,82 @@ let scroll_amount = 0;
 let scroll_drag = 0.98;
 let mouse_pos = [0, 0];
 
+let max_attenuation = 0.91;
+let attenuation = 0.0;
+let attenuation_sensitivity = 0.003;
+let attenuation_drag = 0.999;
+
 let scroll_sensitivity = 0.003;
 var previous_time = 0;
 
+gl.clearColor(0.1, 0.1, 0.1, 1.);
+gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+gl.clear(gl.COLOR_BUFFER_BIT);
+gl.disable(gl.DEPTH_TEST);
+
 var animate = function(time) {
 
+    gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
     var dt = time - previous_time;
     previous_time = time;
 
+    attenuation = Math.min(max_attenuation * Math.abs(scroll_speed) * attenuation_sensitivity + (1. - attenuation_sensitivity) * attenuation * attenuation_drag, max_attenuation);
+    console.log(attenuation);
+    // COPY BUFFER
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, copy_framebuffer);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+
+    gl.useProgram(copy_shaderProgram);
+
+    gl.uniform1i(uLoc_copy_render_tex, 0);
+    gl.uniform1f(uLoc_erase_speed, attenuation);
+
+    gl.vertexAttribPointer(uLoc_copy_quadPos, 2, gl.FLOAT, false, 4*4, 0);
+    gl.enableVertexAttribArray(uLoc_copy_quadPos);
+    gl.vertexAttribPointer(uLoc_copy_uv, 2, gl.FLOAT, false, 4*4, 2*4);
+    gl.enableVertexAttribArray(uLoc_copy_uv);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+
+    gl.useProgram(copy_shaderProgram);
+
+    gl.uniform1i(uLoc_copy_render_tex, 0);
+    gl.uniform1f(uLoc_erase_speed, 1.);
+
+    gl.vertexAttribPointer(uLoc_copy_quadPos, 2, gl.FLOAT, false, 4*4, 0);
+    gl.enableVertexAttribArray(uLoc_copy_quadPos);
+    gl.vertexAttribPointer(uLoc_copy_uv, 2, gl.FLOAT, false, 4*4, 2*4);
+    gl.enableVertexAttribArray(uLoc_copy_uv);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, copy_tex);
+
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    // END COPY
+
     // Setting up draw context
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
-
-    gl.clearColor(0.1, 0.1, 0.1, 1.0);
-
     gl.viewport(0.0, 0.0, canvas.width, canvas.height);
-    gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(shaderProgram);
     gl.vertexAttribPointer(uLoc_vertexPos, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(uLoc_vertexPos);
@@ -291,13 +417,17 @@ var animate = function(time) {
 
     gl.drawArrays(gl.POINTS, 0, VERTICES_COUNT);
 
+
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
     gl.useProgram(renderProgram);
 
     gl.uniform1i(uLoc_render_tex, 0);
     gl.uniform1f(uLoc_aspect_ratio, aspect_ratio);
-    gl.uniform1f(uLoc_radius, 0.35+scroll_speed/30.);
+    gl.uniform1f(uLoc_radius, 0.15+scroll_speed/30.);
     gl.uniform1f(uLoc_quadtime, time*0.001);
     gl.uniform2f(uLoc_mouse_pos, mouse_pos[0], mouse_pos[1]);
 
@@ -354,7 +484,7 @@ function handleMouseMove(event) {
           (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
           (doc && doc.clientTop  || body && body.clientTop  || 0 );
     }
-    mouse_pos = [(event.pageX-canvas.offsetWidth/2.)/canvas.offsetHeight, 0.5-event.pageY/canvas.offsetHeight];
+    mouse_pos = [(event.x)/canvas.offsetHeight, 1.-event.y/canvas.offsetHeight];
     // Use event.pageX / event.pageY here
 }
 

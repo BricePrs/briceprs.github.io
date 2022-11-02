@@ -11,20 +11,33 @@ body {
     all: unset;
 }
 
-
 .project-list {
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    z-index: 2;
 }
 
 .project {
-    background-color: #202020;
+    background-color: #202020BB;
+    max-width: 500px;
     padding: 20px 20px 20px 20px;
     margin: 20px 10px 20px 10px;
-    width: auto;
-    border-radius: 4px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #202020BB;
+    border-width: 2px;
+    transition: 300ms;
+    flex-basis: 45%;
+    flex-grow: 1;
+}
+
+.project:hover {
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 2px;
+    border-color: #4067efFF;
+    transition: 300ms;
 }
 
 .project h1 {
@@ -42,7 +55,7 @@ body {
 }
 
 .project img {
-    max-width: 85%;
+    max-width: 300px;
     height: auto;
     margin: 10px 10px 10px 10px;
 }
@@ -53,10 +66,3 @@ body {
     justify-content: space-around;
 }
 
-.double {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-color: #f3f3f3;
-}
