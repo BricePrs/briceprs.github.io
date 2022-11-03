@@ -163,7 +163,9 @@ var vertex_code = "uniform vec2 mouse_pos;\n" +
     "attribute vec3 a_vertexPos;\n" +
     "\n" +
     "#define PI 3.141592\n" +
-    "#define NBR_OF_ANIM 6\n" +
+    "#define NBR_OF_ANIM 3\n" +
+    "\n" +
+    "#define modulo(x, m) x-x/m*m\n" +
     "\n" +
     "mat2 rotate(float ang) {\n" +
     "   return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));\n" +
@@ -174,7 +176,7 @@ var vertex_code = "uniform vec2 mouse_pos;\n" +
     "}\n" +
     "\n" +
     "vec3 swap_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area) {\n" +
-    "    return mix(a, b, smoothstep(swp_time-swap_area, swp_time+swap_area, anim_time));\n" +
+    "    return mix(a, b, smoothstep(swp_time-swap_area, swp_time, anim_time));\n" +
     "}\n" +
     "\n" +
     "vec3 project_onto_torus(vec3 p) {\n" +
@@ -184,7 +186,7 @@ var vertex_code = "uniform vec2 mouse_pos;\n" +
     "}\n" +
     "\n" +
     "vec3 dust_cloud(vec3 vertex_pos, float anim_time) {\n" +
-    "   vec3 mod_vertexPos = mod(vertex_pos+vec3(0, anim_time*4., 0),2.)-1.;\n" +
+    "   vec3 mod_vertexPos = mod(vertex_pos+vec3(0, anim_time*9., 0),2.)-1.;\n" +
     "   return mod_vertexPos;\n" +
     "}\n" +
     "\n" +
@@ -202,11 +204,11 @@ var vertex_code = "uniform vec2 mouse_pos;\n" +
     "    angle = atan(anchor_pos.x/ anchor_pos.y)+PI*(1.+sign)*.5;\n" +
     "\n" +
     "    float max_spike_count = 9.;\n" +
-    "    float spike_count = max(0., floor((anim_time-.5)*2.*max_spike_count));\n" +
+    "    float spike_count = max(0., floor((anim_time-.5)*4.*max_spike_count));\n" +
     "\n" +
     "    float prev_ray_mult = 1.+(0.1*sin(1.*time+angle*spike_count));\n" +
     "    float next_ray_mult = 1.+(0.1*sin(1.*time+angle*(spike_count+1.)));\n" +
-    "    float ray = mix(prev_ray_mult, next_ray_mult, smoothstep(0., 1., fract(max(0., anim_time-.5)*2.*max_spike_count)));\n" +
+    "    float ray = mix(prev_ray_mult, next_ray_mult, smoothstep(0., 1., fract(max(0., anim_time-.5)*4.*max_spike_count)));\n" +
     "\n" +
     "    anchor_pos.xy *= ray;\n" +
     "\n" +
@@ -226,45 +228,82 @@ var vertex_code = "uniform vec2 mouse_pos;\n" +
     "\n" +
     "void main() {\n" +
     "\n" +
-    "    float ANIM_DUR[NBR_OF_ANIM];\n" +
-    "    ANIM_DUR[0] = 5.0;\n" +
-    "    ANIM_DUR[1] = 13.0;\n" +
-    "    ANIM_DUR[2] = 6.0;\n" +
-    "    ANIM_DUR[3] = 6.0;\n" +
-    "    ANIM_DUR[4] = 0.0;\n" +
+    "    float anim_dur[NBR_OF_ANIM];\n" +
+    "    anim_dur[0] = 12.0;\n" +
+    "    anim_dur[1] = 18.0;\n" +
+    "    anim_dur[2] = 10.0;\n" +
     "\n" +
     "    float anim_swp_area[NBR_OF_ANIM];\n" +
-    "    anim_swp_area[0] = 0.5;\n" +
-    "    anim_swp_area[1] = 1.0;\n" +
-    "    anim_swp_area[2] = 1.5;\n" +
-    "    anim_swp_area[3] = 1.3;\n" +
-    "    anim_swp_area[4] = 0.5;\n" +
+    "    anim_swp_area[0] = 3.;\n" +
+    "    anim_swp_area[1] = 2.;\n" +
+    "    anim_swp_area[2] = 3.;\n" +
     "\n" +
-    "    float anim_swp_time[NBR_OF_ANIM];\n" +
+    "    float anim_swp_time[NBR_OF_ANIM+1];\n" +
     "\n" +
     "    float total_duration = 0.;\n" +
     "    for (int i = 0; i < NBR_OF_ANIM; i++) {\n" +
     "        anim_swp_time[i] = total_duration;\n" +
-    "        total_duration += ANIM_DUR[i];\n" +
+    "        total_duration += anim_dur[i];\n" +
     "    }\n" +
+    "    anim_swp_time[NBR_OF_ANIM] = total_duration;\n" +
+    "\n" +
     "\n" +
     "    float anim_time = fract((0.03 * time + scroll_amount) / total_duration) * total_duration;\n" +
     "\n" +
-    "    vec3 dust_cloud_pos = dust_cloud(a_vertexPos, local_anim_time(anim_time, anim_swp_time[0], anim_swp_time[1]));\n" +
-    "    vec3 mod_vertexPos = dust_cloud_pos;\n" +
+    "    int curr_anim_nbr = NBR_OF_ANIM;\n" +
+    "    for (int i = 0; i < NBR_OF_ANIM+1; i++) {\n" +
+    "        if (anim_time < anim_swp_time[i]) {\n" +
+    "            curr_anim_nbr = i-1;\n" +
+    "            break;\n" +
+    "        }\n" +
+    "    }\n" +
     "\n" +
-    "    float weird_circle_time = local_anim_time(anim_time, anim_swp_time[1], anim_swp_time[2]);\n" +
-    "    vec3 weird_circle_pos = weird_circle(dust_cloud_pos, weird_circle_time);\n" +
-    "    mod_vertexPos = swap_vec3(dust_cloud_pos, weird_circle_pos, anim_time, anim_swp_time[1], anim_swp_area[1]);\n" +
+    "    vec3 start_pos;\n" +
+    "    vec3 end_pos;\n" +
+    "    vec3 mod_vertexPos;\n" +
     "\n" +
-    "    float torus_time = local_anim_time(anim_time, anim_swp_time[2], anim_swp_time[3]);\n" +
-    "    vec3 torus_pos = torus(a_vertexPos, torus_time);\n" +
-    "    mod_vertexPos = swap_vec3(mod_vertexPos, torus_pos, anim_time, anim_swp_time[2], anim_swp_area[2]);\n" +
+    "    const int ANIM_0 = 0;\n" +
+    "    if (ANIM_0 == curr_anim_nbr || ANIM_0 == curr_anim_nbr+1 || curr_anim_nbr+1 == NBR_OF_ANIM) {\n" +
+    "        vec3 local_pos = dust_cloud(a_vertexPos, local_anim_time(anim_time, anim_swp_time[ANIM_0], anim_swp_time[ANIM_0 + 1]));\n" +
+    "        if (ANIM_0 == curr_anim_nbr) {\n" +
+    "            start_pos = local_pos;\n" +
+    "        } else {\n" +
+    "            end_pos = local_pos;\n" +
+    "        }\n" +
+    "    }\n" +
     "\n" +
-    "    mod_vertexPos = swap_vec3(mod_vertexPos, dust_cloud_pos, anim_time, anim_swp_time[3], anim_swp_area[3]);\n" +
+    "    const int ANIM_1 = 1;\n" +
+    "    if (ANIM_1 == curr_anim_nbr || ANIM_1 == curr_anim_nbr+1) {\n" +
+    "        float weird_circle_time = local_anim_time(anim_time, anim_swp_time[ANIM_1], anim_swp_time[ANIM_1 +1]);\n" +
+    "        vec3 local_pos = weird_circle(a_vertexPos, weird_circle_time);\n" +
+    "        if (ANIM_1 == curr_anim_nbr+1) {\n" +
+    "            end_pos = local_pos;\n" +
+    "            mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, anim_swp_time[ANIM_1], anim_swp_area[ANIM_1]);\n" +
+    "        } else {\n" +
+    "            start_pos = local_pos;\n" +
+    "        }\n" +
+    "    }\n" +
+    "\n" +
+    "    const int ANIM_2 = 2;\n" +
+    "    if (ANIM_2 == curr_anim_nbr || ANIM_2 == curr_anim_nbr+1) {\n" +
+    "        float torus_time = local_anim_time(anim_time, anim_swp_time[ANIM_2], anim_swp_time[ANIM_2 + 1]);\n" +
+    "        vec3 local_pos = torus(a_vertexPos, torus_time);\n" +
+    "        if (ANIM_2 == curr_anim_nbr+1) {\n" +
+    "            end_pos = local_pos;\n" +
+    "            mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, anim_swp_time[ANIM_2], anim_swp_area[ANIM_2]);\n" +
+    "        } else {\n" +
+    "            start_pos = local_pos;\n" +
+    "        }\n" +
+    "    }\n" +
+    "\n" +
+    "    if (curr_anim_nbr == NBR_OF_ANIM-1) {\n" +
+    "        mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, total_duration, anim_swp_area[0]);\n" +
+    "    }\n" +
+    "\n" +
     "\n" +
     "    mod_vertexPos.xz *= rotate(mouse_pos.x * 0.1);\n" +
     "    mod_vertexPos.yz *= rotate(mouse_pos.y * 0.1);\n" +
+    "\n" +
     "\n" +
     "    gl_Position = projection * view * vec4(mod_vertexPos, 1.);\n" +
     "    gl_PointSize = 5. * pow((mod_vertexPos.z + 1.) * .5, 1.);\n" +
@@ -520,8 +559,8 @@ var animate = function(time) {
 }
 
 function onWindowResize(event) {
-    canvas.setAttribute('width', body_main.offsetWidth.toString());
-    canvas.setAttribute('height', body_main.offsetHeight.toString());
+    canvas.setAttribute('width', canvas.offsetWidth.toString());
+    canvas.setAttribute('height', canvas.offsetHeight.toString());
 
     gl.deleteTexture(tex);
     tex = gl.createTexture();
