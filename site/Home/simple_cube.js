@@ -439,6 +439,15 @@ gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
 gl.clear(gl.COLOR_BUFFER_BIT);
 gl.disable(gl.DEPTH_TEST);
 
+function sign(a) {
+    if (a < 0) {
+        return -1;
+    } else if (a > 0) {
+        return 1;
+    }
+    return 0;
+}
+
 var animate = function(time) {
 
     gl.clearColor(0.1, 0.1, 0.1, 1.0);
@@ -521,9 +530,15 @@ var animate = function(time) {
     gl.uniformMatrix4fv(uLoc_model, false, model_matrix);
     gl.uniform2f(uLoc_mouseposrender, mouse_pos[0], mouse_pos[1]);
 
-
-    scroll_amount += scroll_speed * dt*0.001;
+    var goal = window.scrollY*0.01;
+    var dst_to_goal = goal - scroll_amount;
+    var direction = sign(dst_to_goal);
+    scroll_speed = max_scroll_speed;
+    scroll_amount += direction * Math.min(scroll_speed * dt*0.001, Math.abs(dst_to_goal));
     scroll_speed *= scroll_drag;
+
+    //scroll_amount += scroll_speed * dt*0.001;
+    //scroll_speed *= scroll_drag;
     gl.uniform1f(uLoc_time, time*0.001);
     gl.uniform1f(uLoc_scroll_amount, scroll_amount);
 
