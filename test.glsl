@@ -47,7 +47,7 @@ vec3 project_onto_torus(vec3 p) {
 }
 
 vec3 dust_cloud(vec3 vertex_pos, float anim_time) {
-   vec3 mod_vertexPos = mod(vertex_pos+vec3(0, anim_time*9., 0),2.)-1.;
+   vec3 mod_vertexPos = mod(vertex_pos+vec3(0, anim_time*3., 0),2.)-1.;
    return mod_vertexPos;
 }
 

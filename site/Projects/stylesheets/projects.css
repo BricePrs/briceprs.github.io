@@ -29,11 +29,31 @@ body {
     border-color: #202020BB;
     border-width: 2px;
     transition: 300ms;
-    flex-basis: 45%;
-    flex-grow: 1;
+    flex-shrink: 3;
 }
 
 .project:hover {
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 2px;
+    border-color: #4067efFF;
+    transition: 300ms;
+}
+
+
+.project[state=focused] {
+    background-color: #202020FF;
+    max-width: 95%;
+    height: 85vh;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #4067efFF;
+    border-width: 2px;
+    transition: 300ms;
+    flex-grow: 3;
+}
+
+.project:hover[state=focused] {
     border-style: solid;
     border-radius: 3px;
     border-width: 2px;
