@@ -13,6 +13,10 @@ attribute vec3 a_vertexPos;
 
 #define modulo(x, m) x-x/m*m
 
+vec3 random_pos(vec3 pos) {
+    return fract(vec3(192.426, 128.123, 183.123)*sin(pos*vec3(453.12, 264.174, 198.42)))*2.-1.;
+}
+
 mat2 rotate(float ang) {
    return mat2(cos(ang), sin(ang), -sin(ang), cos(ang));
 }
@@ -23,6 +27,17 @@ float local_anim_time(float time, float anim_start, float anim_end) {
 
 vec3 swap_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area) {
     return mix(a, b, smoothstep(swp_time-swap_area, swp_time, anim_time));
+}
+
+float hash_spark(float x, float a, float b, float delta_time) {
+    return fract(824.223*sin(293.124*x))*(b-a-delta_time)+a;
+}
+
+vec3 swap_spark_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area, float delta_time) {
+    float spark_delta_time = delta_time * a_vertexPos.z;
+    float spark_swp_time = hash_spark(a_vertexPos.x+a_vertexPos.y+a_vertexPos.z, swp_time-swap_area, swp_time, delta_time);
+    return mix(mix(a, 2.*b, smoothstep(spark_swp_time-delta_time, spark_swp_time, anim_time)), mix(2.*b, b, smoothstep(spark_swp_time-delta_time, spark_swp_time, anim_time))
+    , smoothstep(spark_swp_time-delta_time, spark_swp_time, anim_time));
 }
 
 vec3 project_onto_torus(vec3 p) {
@@ -67,8 +82,8 @@ vec3 weird_circle(vec3 vertex_pos, float anim_time) {
 
 vec3 torus(vec3 vertex_pos, float anim_time) {
     vec3 torus_pos = project_onto_torus(vertex_pos * 1.8);
-    torus_pos.yz *= rotate(10. * anim_time);
-    torus_pos.xy *= rotate(7. * anim_time * 0.2 + time * 0.1);
+    torus_pos.yz *= rotate(20. * anim_time);
+    torus_pos.xy *= rotate(14. * anim_time * 0.2 + time * 0.1);
     return torus_pos*.35+vec3(0, 0, -0.5);
 }
 
@@ -80,8 +95,8 @@ void main() {
     anim_dur[2] = 10.0;
 
     float anim_swp_area[NBR_OF_ANIM];
-    anim_swp_area[0] = 3.;
-    anim_swp_area[1] = 2.;
+    anim_swp_area[0] = 2.;
+    anim_swp_area[1] = 4.;
     anim_swp_area[2] = 3.;
 
     float anim_swp_time[NBR_OF_ANIM+1];
@@ -143,7 +158,7 @@ void main() {
     }
 
     if (curr_anim_nbr == NBR_OF_ANIM-1) {
-        mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, total_duration, anim_swp_area[0]);
+        mod_vertexPos = mix(start_pos, end_pos, 1.-pow(min(1., (total_duration-anim_time)/anim_swp_area[0]), 2.));
     }
 
 
@@ -152,7 +167,5 @@ void main() {
 
 
     gl_Position = projection * view * vec4(mod_vertexPos, 1.);
-    gl_PointSize = 5. * pow((mod_vertexPos.z + 1.) * .5, 1.);
+    gl_PointSize = min(5., 5. * pow((mod_vertexPos.z + 1.) * .5, 1.));
 }
-
-
