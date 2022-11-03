@@ -1,0 +1,25 @@
+
+html {
+    cursor: none;
+}
+
+@media only screen and (hover: none) and (pointer: coarse){
+    body {
+        all: unset;
+    }
+
+    main {
+        top: 0;
+        z-index: -1;
+        height: 600vh;
+    }
+}
+
+#my_Canvas {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}

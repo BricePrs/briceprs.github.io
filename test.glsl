@@ -69,7 +69,7 @@ vec3 torus(vec3 vertex_pos, float anim_time) {
     vec3 torus_pos = project_onto_torus(vertex_pos * 1.8);
     torus_pos.yz *= rotate(10. * anim_time);
     torus_pos.xy *= rotate(7. * anim_time * 0.2 + time * 0.1);
-    return torus_pos*.4+vec3(0, 0, -0.5);
+    return torus_pos*.35+vec3(0, 0, -0.5);
 }
 
 void main() {
