@@ -167,5 +167,5 @@ void main() {
 
 
     gl_Position = projection * view * vec4(mod_vertexPos, 1.);
-    gl_PointSize = min(5., 5. * pow((mod_vertexPos.z + 1.) * .5, 1.));
+    gl_PointSize = min(4., 5. * pow((mod_vertexPos.z + 1.) * .5, 1.));
 }
