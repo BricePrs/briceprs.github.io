@@ -4,6 +4,33 @@
   src: url("../../../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
-#CVbutton {
+main {
+    position: relative;
     top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+}
+
+#CVbutton {
+    font-family: Roboto, serif;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #4067ef00;
+    border-width: 2px;
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #f3eedd;
+    padding: 10px 20px 10px 20px;
+    transition: 300ms;
+}
+
+#CVbutton:hover {
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #4067efFF;
+    border-width: 2px;
+    transition: 300ms;
 }

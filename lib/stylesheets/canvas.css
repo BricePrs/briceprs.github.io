@@ -3,20 +3,26 @@ html {
     cursor: none;
 }
 
+main {
+    position: absolute;
+    top: 80vh;
+}
+
 @media only screen and (hover: none) and (pointer: coarse){
     body {
         all: unset;
     }
 
     main {
-        top: 0;
+        position: absolute;
+        top: 80px;
         z-index: -1;
         height: 600vh;
     }
 }
 
 #my_Canvas {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
