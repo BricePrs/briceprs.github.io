@@ -5,7 +5,7 @@ html {
 
 main {
     position: absolute;
-    top: 80vh;
+    top: 90vh;
 }
 
 @media only screen and (hover: none) and (pointer: coarse){

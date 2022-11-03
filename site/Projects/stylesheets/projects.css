@@ -77,6 +77,8 @@ body {
 .project * {
     color: #f3eedd;
     font-size: 16px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .project img {
