@@ -28,7 +28,7 @@ body {
     border-radius: 3px;
     border-color: #202020BB;
     border-width: 2px;
-    transition: 300ms;
+    transition: 500ms;
     overflow: clip;
 }
 
@@ -59,6 +59,10 @@ body {
     flex-grow: 3;
 }
 
+.project[state=unfocused] {
+    transition: 500ms;
+}
+
 .project:hover[state=focused] {
     cursor: default;
 }
@@ -71,7 +75,11 @@ body {
     transition: 300ms;
 }
 
-.project h1 {63342
+#empty {
+    height: 100vh;
+}
+
+.project h1 {
     color: #f3eedd;
     font-size: 30px;
 }
@@ -95,11 +103,22 @@ body {
 }
 
 *[state=shown] {
-    display: initial;
+    transition: 300ms;
 }
 
 *[state=hidden] {
-    display: none;
+    transform: translateY(200vh);
+    transition: 300ms;
+}
+
+*[state=hidden][reverse] {
+    transition: 300ms;
+    transform: translate(0, 0);
+}
+
+*[state=shown][reverse] {
+    transform: translate(-200vh, 0);
+    transition: 300ms;
 }
 
 

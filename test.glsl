@@ -5,6 +5,7 @@ uniform mat4 model;
 
 uniform float time;
 uniform float scroll_amount;
+uniform bool isMobile;
 
 attribute vec3 a_vertexPos;
 
@@ -161,10 +162,10 @@ void main() {
         mod_vertexPos = mix(start_pos, end_pos, 1.-pow(min(1., (total_duration-anim_time)/anim_swp_area[0]), 2.));
     }
 
-
-    mod_vertexPos.xz *= rotate(mouse_pos.x * 0.1);
-    mod_vertexPos.yz *= rotate(mouse_pos.y * 0.1);
-
+    if (!isMobile) {
+        mod_vertexPos.xz *= rotate(mouse_pos.x * 0.1);
+        mod_vertexPos.yz *= rotate(mouse_pos.y * 0.1);
+    }
 
     gl_Position = projection * view * vec4(mod_vertexPos, 1.);
     gl_PointSize = min(4., 5. * pow((mod_vertexPos.z + 1.) * .5, 1.));
