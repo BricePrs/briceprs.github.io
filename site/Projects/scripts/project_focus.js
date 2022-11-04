@@ -4,11 +4,21 @@ const projects = document.getElementsByClassName("project");
 const main = document.getElementsByTagName("main")[0];
 const header = document.getElementById("top-bar");
 
+let current_focus = null;
+let date = new Date();
+let focus_time = date.getTime()
+
 function onClickEvent(event) {
     let project = event.target.closest(".project");
     let state = project.getAttribute("state");
-    unfocus_all();
+    console.log(project.clientTop);
+    unfocus_current()
+
     if (state === "unfocused") {
+        current_focus = project;
+        date = new Date();
+        focus_time = date.getTime()
+
         project.setAttribute("state", "focused")
         window.scrollBy({
             top: project.getBoundingClientRect().top - header.offsetHeight*1.2,
@@ -27,13 +37,26 @@ for (let i = 0; i < projects.length; i++) {
     projects[i].addEventListener("click", onClickEvent);
 }
 
-if(document.addEventListener){
-      document.addEventListener('wheel',mouseScroll,false);
- }
+document.addEventListener("scroll", scroll_event);
 
+function scroll_event(event) {
+    //console.log(current_focus);
+    date = new Date();
+    console.log(date.getTime()-focus_time);
+    if (!current_focus || (date.getTime()-focus_time) < 100) { return; }
+    if (Math.abs(current_focus.offsetTop - window.scrollY + 2.*window.innerHeight/3.) > window.innerHeight/2.) {
+        unfocus_current();
+    }
+}
 
-function mouseScroll(e) {
-    unfocus_all();
+function unfocus_current() {
+    if (!current_focus) {return;}
+    current_focus.setAttribute("state", "unfocused");
+    let hide_able_elts = current_focus.getElementsByClassName("hide-able");
+    for (let j = 0; j < hide_able_elts.length; j++) {
+        hide_able_elts[j].setAttribute("state", "hidden");
+    }
+    current_focus = null;
 }
 
 function unfocus_all() {
