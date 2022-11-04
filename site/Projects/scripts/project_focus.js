@@ -11,9 +11,13 @@ function onClickEvent(event) {
     if (state === "unfocused") {
         project.setAttribute("state", "focused")
         window.scrollBy({
-            top: +project.getBoundingClientRect().top - header.offsetHeight*1.2,
+            top: project.getBoundingClientRect().top - header.offsetHeight*1.2,
             behavior: 'smooth'
         });
+        let hide_able_elts = project.getElementsByClassName("hide-able");
+        for (let j = 0; j < hide_able_elts.length; j++) {
+            hide_able_elts[j].setAttribute("state", "shown");
+        }
     }
 }
 
@@ -35,5 +39,11 @@ function mouseScroll(e) {
 function unfocus_all() {
     for (let i = 0; i < projects.length; i++) {
         projects[i].setAttribute("state", "unfocused")
+        let hide_able_elts = projects[i].getElementsByClassName("hide-able");
+        for (let j = 0; j < hide_able_elts.length; j++) {
+            hide_able_elts[j].setAttribute("state", "hidden");
+        }
     }
 }
+
+unfocus_all();

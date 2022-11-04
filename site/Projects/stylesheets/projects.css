@@ -29,7 +29,13 @@ body {
     border-color: #202020BB;
     border-width: 2px;
     transition: 300ms;
-    flex-shrink: 3;
+    overflow: clip;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .project:hover {
@@ -65,7 +71,7 @@ body {
     transition: 300ms;
 }
 
-.project h1 {
+.project h1 {63342
     color: #f3eedd;
     font-size: 30px;
 }
@@ -81,13 +87,28 @@ body {
     text-justify: inter-word;
 }
 
+.media-list {
+    margin: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+*[state=shown] {
+    display: initial;
+}
+
+*[state=hidden] {
+    display: none;
+}
+
+
 .project img {
     max-width: 40%;
     min-width: min(250px, 95%);
     width: auto;
     height: auto;
-    margin: 10px 10px 10px 10px;
-
+    margin: 5px 5px 5px 5px;
 }
 
 .project * a {
@@ -97,8 +118,8 @@ body {
     border-width: 2px;
     border-radius: 6px;
     padding: 5px 10px 5px 10px;
+    margin: 5px 5px 5px 5px;
     font-size: 15px;
-    font-weight: bold;
     text-decoration: None;
     position: relative;
     float: right;
@@ -113,6 +134,13 @@ body {
     border-radius: 6px;
     transition: 300ms;
 
+}
+
+.project h6 {
+    color: #e7cccc;
+    font-size: 17px;
+    margin: 15px 0 0 0;
+    font-weight: bold;
 }
 
 
