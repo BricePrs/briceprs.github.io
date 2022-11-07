@@ -38,7 +38,7 @@ main {
     background-color: #202020BB;
     max-width: 60%;
     min-width: min(calc(100% - 4rem), 500px);
-
+    height: 40rem;
     padding: 1rem 1rem 1rem 1rem;
     margin: 1rem 1rem 1rem 1rem;
     border-style: solid;
@@ -82,16 +82,15 @@ main {
     transition: 500ms;
 }
 
-.project:hover[state=focused] {
-    cursor: default;
-}
 
 .project:hover[state=focused] {
     border-style: solid;
+    cursor: default;
     border-radius: 3px;
     border-width: 2px;
     border-color: #4067efFF;
     transition: 300ms;
+);
 }
 
 #empty {
@@ -99,16 +98,16 @@ main {
 }
 
 .project h1 {
-    color: #f3eedd;
+    color: #faf8f4;
     font-size: 30px;
 }
 
 .project h2 {
-    color: #f3eedd;
+    color: #faf8f4;
     font-size: 24px;
 }
 .project * {
-    color: #f3eedd;
+    color: #faf8f4;
     font-size: 16px;
     text-align: justify;
     text-justify: inter-word;
@@ -119,6 +118,8 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 *[state=shown] {
@@ -133,7 +134,7 @@ main {
 *[state=hidden][reverse] {
     display: initial;
     transition: 300ms;
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1%);
 }
 
 *[state=shown][reverse] {
@@ -142,19 +143,18 @@ main {
     transition: 300ms;
 }
 
+[small] {
+    max-width: 200px;
+}
 
 .project img {
     max-width: 40%;
-    min-width: min(250px, 95%);
+    min-width: min(500px, 95%);
     width: auto;
     height: auto;
+
     margin: 5px 5px 5px 5px;
 }
-
-*[small] {
-    flex-shrink: 0;
-}
-
 
 .project * a {
     background-color: #ffffff22;
@@ -182,7 +182,7 @@ main {
 }
 
 .project h6 {
-    color: #e7cccc;
+    color: #c0b1e8;
     font-size: 17px;
     margin: 15px 0 0 0;
     font-weight: bold;
@@ -192,5 +192,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding: 1rem 3rem 1rem 3rem;
+    max-height: 100%;
 }
 
