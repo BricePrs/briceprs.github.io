@@ -42,9 +42,10 @@ document.addEventListener("scroll", scroll_event);
 function scroll_event(event) {
     //console.log(current_focus);
     date = new Date();
-    console.log(date.getTime()-focus_time);
     if (!current_focus || (date.getTime()-focus_time) < 100) { return; }
-    if (Math.abs(current_focus.offsetTop - window.scrollY + 2.*window.innerHeight/3.) > window.innerHeight/2.) {
+    console.log(current_focus.offsetTop, window.scrollY, window.outerHeight, Math.abs(current_focus.offsetTop - window.scrollY + 2.*window.outerHeight/3.));
+    if (Math.abs(current_focus.offsetTop - window.scrollY + scroll_offset_unfocus) > window.outerHeight/2.) {
+        console.log("oui");
         unfocus_current();
     }
 }
@@ -70,3 +71,13 @@ function unfocus_all() {
 }
 
 unfocus_all();
+
+let scroll_offset_unfocus = 0
+window.addEventListener("load", () => {
+    if (isMobile) {
+        scroll_offset_unfocus = 0;
+    }
+    else {
+        scroll_offset_unfocus = 2.*window.outerHeight/3.;
+    }
+});
