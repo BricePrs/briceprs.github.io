@@ -4,9 +4,20 @@
   src: url("../../../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
-* {
+
+
+html {
+    background-color: #191919;
+    font-size: 15px;
     font-family: Roboto, serif;
 }
+
+@media screen and (max-width: 500px) {
+     html {
+        font-size: 11px;
+    }
+}
+
 body {
     all: unset;
 }
@@ -26,8 +37,10 @@ main {
 .project {
     background-color: #202020BB;
     max-width: 60%;
-    padding: 20px 20px 20px 20px;
-    margin: 20px 10px 20px 10px;
+    min-width: min(calc(100% - 4rem), 500px);
+
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 1rem 1rem;
     border-style: solid;
     border-radius: 3px;
     border-color: #202020BB;
@@ -40,6 +53,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    column-gap: 4%;
 }
 
 .project:hover {
@@ -53,8 +67,8 @@ main {
 
 .project[state=focused] {
     background-color: #202020FF;
-    max-width: 95%;
-    height: 85vh;
+    height: calc(100vh - 2rem - 60px);
+    max-width: 100vw;
     border-style: solid;
     border-radius: 3px;
     border-color: #4067efFF;
@@ -173,8 +187,6 @@ main {
     margin: 15px 0 0 0;
     font-weight: bold;
 }
-
-
 
 .project-descr {
     display: flex;

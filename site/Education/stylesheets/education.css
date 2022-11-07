@@ -4,28 +4,30 @@
   src: url("../../../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
+
+
 #CVbutton {
     position: fixed;
     right: 5px;
     bottom: 5px;
     font-family: Roboto, serif;
-    border-style: solid;
-    border-radius: 3px;
-    border-color: #4067efFF;
-    border-width: 2px;
-    font-size: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
     text-decoration: none;
-    color: #f3eedd;
-    padding: 10px 20px 10px 20px;
+    color: #ffffff;
+    padding: .5rem 1rem .5rem 1rem;
     transition: 300ms;
+    z-index: 5;
+    background: linear-gradient(0.3turn, #6454f5, #4067ef);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 #CVbutton:hover {
-    border-style: solid;
-    border-radius: 3px;
-    border-color: #ec6957;
-    border-width: 2px;
     transition: 300ms;
+    font-size: 1.7rem;
 }
 
 
@@ -54,7 +56,7 @@ body {
 .school {
     background-color: #202020BB;
     width: 90%;
-    padding: 50px 20px 5% 20px;
+    padding: 2rem 1rem 2.5rem 1rem;
     margin: 20px 10px 20px 10px;
     border-style: solid;
     border-radius: 3px;
@@ -66,13 +68,16 @@ body {
 
 .school:hover h1 {
     color: #6454f5;
-    transition: 1s;
+    transition: 700ms;
 }
+
 
 .header-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-align: left;
+    column-gap: 3rem;
 }
 
 .school:hover {
@@ -85,16 +90,16 @@ body {
 
 .school h1 {
     color: #f3eedd;
-    font-size: 30px;
+    font-size: 1.6rem;
 }
 
 .school h2 {
     color: #f3eedd;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 .school {
     color: #f3eedd;
-    font-size: 16px;
+    font-size: 1.2rem;
     text-align: justify;
     text-justify: inter-word;
 }
@@ -108,8 +113,9 @@ body {
 
 .school h6 {
     color: #e7cccc;
-    font-size: 17px;
+    font-size: 1rem;
     margin: 15px 0 0 0;
     font-weight: bold;
+    width: min(15rem, 35%);
+    text-align: right;
 }
-

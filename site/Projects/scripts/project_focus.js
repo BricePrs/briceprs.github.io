@@ -21,7 +21,7 @@ function onClickEvent(event) {
 
         project.setAttribute("state", "focused")
         window.scrollBy({
-            top: project.getBoundingClientRect().top - header.offsetHeight*1.2,
+            top: project.getBoundingClientRect().top - header.offsetHeight,
             behavior: 'smooth'
         });
         let hide_able_elts = project.getElementsByClassName("hide-able");
