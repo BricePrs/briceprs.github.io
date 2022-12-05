@@ -46,7 +46,7 @@ main {
     border-color: #202020BB;
     border-width: 2px;
     transition: 500ms;
-    overflow: clip;
+    overflow: scroll;
 }
 
 .header-container {
@@ -75,7 +75,7 @@ main {
     border-width: 2px;
     transition: 300ms;
     flex-grow: 3;
-    overflow: auto;
+
 }
 
 .project[state=unfocused] {

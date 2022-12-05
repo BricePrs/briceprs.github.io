@@ -32,6 +32,29 @@
     </canvas>
 
     <div class="project-list">
+
+      <div class="project" state="unfocused">
+        <div class="project-descr">
+          <div class="project-descr-text">
+            <div class="header-container">
+              <h1>Face deformation</h1>
+              <h6>Nov. 2022 | Python (school project)</h6>
+            </div>
+            <p>This project's goal was to modify the mesh of a 3D scan of a face by approximating it first with a Bezier surface.</p>
+            <p>A cut is first performed to apply a least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
+              Then, the control points can be easily modified in order to get this final result. The approximated surface can then easily be knitted back to the original mesh with a screened Poisson surface reconstruction.</p>
+          </div>
+          <div class="media-list">
+            <img src="misc/kinect/a.png" alt="selected mesh"/>
+            <img src="misc/kinect/b.png" alt="control polyhedron"/>
+            <img src="misc/kinect/c.png" alt="border constraints"/>
+            <img src="misc/kinect/d.png" alt="control points with an offset"/>
+            <img src="misc/kinect/e.png" alt="final result (not knitted)"/>
+            <img src="misc/kinect/f.png" alt="final result closer look (not knitted)"/>
+          </div>
+        </div>
+      </div>
+
       <div class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
@@ -201,7 +224,7 @@
             <a href="misc/"  title="Project Repo" target="_blank">Source Code</a>
           </div>
 
-          <div class="media-list hide-able">
+          <div class="media-list">
             <img src="misc/python/particle-field.gif" alt="image of a python project"/>
             <img src="misc/python/sphere.gif" alt="image of a python project"/>
             <img src="misc/python/tokamak.png" alt="image of a python project"/>
