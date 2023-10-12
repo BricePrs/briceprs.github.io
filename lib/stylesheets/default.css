@@ -82,7 +82,7 @@ nav {
 #top-bar {
     display: flex;
     justify-content: space-between;
-    height: calc(2rem + 20px);
+    height: calc(2rem + 35px);
 }
 
 #top-bar:hover {
