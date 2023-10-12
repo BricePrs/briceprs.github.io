@@ -10,7 +10,7 @@ uniform bool isMobile;
 attribute vec3 a_vertexPos;
 
 #define PI 3.141592
-#define NBR_OF_ANIM 3
+#define NBR_OF_ANIM 4
 
 #define modulo(x, m) x-x/m*m
 
@@ -32,6 +32,10 @@ vec3 swap_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area)
 
 float hash_spark(float x, float a, float b, float delta_time) {
     return fract(824.223*sin(293.124*x))*(b-a-delta_time)+a;
+}
+
+float hash(vec3 p) {
+    return fract(824.223*sin(293.124*p.x)+sin(652.498*p.z+19.28)+sin(893.273*p.z+81.1));
 }
 
 vec3 swap_spark_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap_area, float delta_time) {
@@ -94,11 +98,13 @@ void main() {
     anim_dur[0] = 12.0;
     anim_dur[1] = 18.0;
     anim_dur[2] = 10.0;
+    anim_dur[3] = 10.0;
 
     float anim_swp_area[NBR_OF_ANIM];
     anim_swp_area[0] = 2.;
     anim_swp_area[1] = 4.;
     anim_swp_area[2] = 3.;
+    anim_swp_area[3] = 3.;
 
     float anim_swp_time[NBR_OF_ANIM+1];
 
@@ -153,6 +159,21 @@ void main() {
         if (ANIM_2 == curr_anim_nbr+1) {
             end_pos = local_pos;
             mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, anim_swp_time[ANIM_2], anim_swp_area[ANIM_2]);
+        } else {
+            start_pos = local_pos;
+        }
+    }
+
+    const int ANIM_3 = 3;
+    if (ANIM_3 == curr_anim_nbr || ANIM_3 == curr_anim_nbr+1) {
+        float tunnel_time = local_anim_time(anim_time, anim_swp_time[ANIM_3], anim_swp_time[ANIM_3 + 1]);
+        float avg_radius = 1. + a_vertexPos.z;
+        vec2 tunnel_pos = rotate(tunnel_time*(1.-a_vertexPos.z*a_vertexPos.z)*10.) * normalize(a_vertexPos.xy) * avg_radius;
+        vec3 local_pos = vec3(tunnel_pos.x, tunnel_pos.y, a_vertexPos.z);
+        local_pos *= 1.-smoothstep(0.8, .9, tunnel_time);
+        if (ANIM_3 == curr_anim_nbr+1) {
+            end_pos = local_pos;
+            mod_vertexPos = swap_vec3(start_pos, end_pos, anim_time, anim_swp_time[ANIM_3], anim_swp_area[ANIM_3]);
         } else {
             start_pos = local_pos;
         }
