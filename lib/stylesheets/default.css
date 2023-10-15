@@ -54,20 +54,27 @@ header {
     width: 100%;
     display: flex;
     position: fixed;
-    padding-bottom: 8px;
     justify-content: space-between;
     height: auto;
+    background-color: rgba(25, 25, 25, 0.62);
+}
+
+header:hover {
+    background-color: rgba(25, 25, 25, 1);
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 000ms;
 }
 
 nav {
     display: flex;
     justify-content: space-around;
-    height: calc(2rem + 20px);
 }
 
 #home-button {
     font-family: "Roboto", serif;
-    background: linear-gradient(0.2turn, #6fb5ff, #4067ef);
+    background: linear-gradient(0.2turn, #d30404, #efb445);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: normal;
@@ -82,25 +89,27 @@ nav {
 #top-bar {
     display: flex;
     justify-content: space-between;
-    height: calc(2rem + 35px);
+    height: calc(2rem + 20px);
 }
 
-#top-bar:hover {
-    transform: translateY(-2px);
+#home-button:hover {
+    transform: scale(1.05) ;
     transition: all 0.1s ease;
 }
 
 #nav-list {
     display: none;
     scale: 60%;
-    padding: 0 10px 0 0;
+    padding: 0 20px 0 0;
+    transform: scale(1.05) ;
+    transition: all 0.1s ease;
 }
 
 nav * {
     margin-right: 20px;
     font-family: "Roboto", serif;
 
-    background: linear-gradient(0.55turn, #6454f5, #78a7f5);
+    background: linear-gradient(0.55turn, #d30404, #efb445);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -112,7 +121,7 @@ nav * {
 }
 
 nav *:hover {
-    transform: translateY(-2px);
+    transform: scale(1.1);
     transition: all 0.1s ease;
 }
 
@@ -122,7 +131,7 @@ nav *:hover {
     header {
         display: flex;
         flex-direction: column;
-        background-color: initial;
+        background-color: rgba(25, 25, 25, 0.62);
     }
 
     #top-bar {
@@ -138,6 +147,7 @@ nav *:hover {
 
     nav {
         transform: translateX(-100vw);
+        height: 0;
     }
 
     nav[state=hidden] {
@@ -145,6 +155,7 @@ nav *:hover {
     }
 
     nav[state=shown] {
+        height: 70px;
         transition: all .2s ease-out;
         transform: translateY(0);
     }
@@ -152,9 +163,12 @@ nav *:hover {
 
     #nav-list {
         display: initial;
+        transform: scale(1.05) ;
+        transition: all 0.1s ease;
     }
     nav * {
         margin-left: 20px;
+        padding-top: 5px;
     }
 }
 

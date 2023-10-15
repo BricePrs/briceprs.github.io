@@ -37,21 +37,54 @@
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
+              <h1>Corys Internship</h1>
+              <h6>May. 2023 | C++ / HLSL / Unreal Engine 5</h6>
+            </div>
+            <p>Corys, an industry leader in railway training simulation, offers cost-effective solutions that eliminate the need for real trains and allow instructors to train multiple students on their own simulators. Their R&D team is actively transitioning from their old 3D engine to UE5 to enhance visual quality in their simulators. </p>
+            <p>During my 4 months internship I made new windscreen effect for rain, snow and dirtiness based on the ones in the previous motor.</p>
+          </div>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container" id="slides-container">
+              
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="project" state="unfocused">
+        <div class="project-descr">
+          <div class="project-descr-text">
+            <div class="header-container">
               <h1>Face deformation</h1>
               <h6>Nov. 2022 | Python (school project)</h6>
             </div>
             <p>This project's goal was to modify the mesh of a 3D scan of a face by approximating it first with a Bezier surface.</p>
-            <p>A cut is first performed to apply a least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
+            <p>A cut is first performed to apply the least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
               Then, the control points can be easily modified in order to get this final result. The approximated surface can then easily be knitted back to the original mesh with a screened Poisson surface reconstruction.</p>
           </div>
-          <div class="media-list">
-            <img src="misc/kinect/a.png" alt="selected mesh"/>
-            <img src="misc/kinect/b.png" alt="control polyhedron"/>
-            <img src="misc/kinect/c.png" alt="border constraints"/>
-            <img src="misc/kinect/d.png" alt="control points with an offset"/>
-            <img src="misc/kinect/e.png" alt="final result (not knitted)"/>
-            <img src="misc/kinect/f.png" alt="final result closer look (not knitted)"/>
-          </div>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container" id="slides-container">
+              <img class="slide" src="misc/kinect/a.png" alt="selected mesh"/>
+              <img class="slide" src="misc/kinect/b.png" alt="control polyhedron"/>
+              <img class="slide" src="misc/kinect/c.png" alt="border constraints"/>
+              <img class="slide" src="misc/kinect/d.png" alt="control points with an offset"/>
+              <img class="slide" src="misc/kinect/e.png" alt="final result (not knitted)"/>
+              <img class="slide" src="misc/kinect/f.png" alt="final result closer look (not knitted)"/>
+
+            </div>
+          </section>
         </div>
       </div>
 
@@ -87,29 +120,21 @@
             <a href="https://ldjam.com/events/ludum-dare/51/seismic-panic"  title="Project Repo" target="_blank">Ludum dare</a>
             <a href="http://virgile.henry.free.fr/games/SeismicPanic/"  title="Play game" target="_blank">Play Game</a>
           </div>
-          <div class="media-list">
-            <img src="misc/ludum_dare/game.gif" alt="gameplay gif"/>
-            <img src="misc/ludum_dare/ludum_dare.png" alt="image of the game"/>
-            <img src="misc/ludum_dare/eng_game.gif" alt="gameplay gif"/>
-          </div>
-        </div>
-      </div>
 
-      <div class="project" state="unfocused">
-        <div class="project-descr">
-          <div class="project-descr-text">
-            <div class="header-container">
-              <h1>Mesh tools</h1>
-              <h6>Sept. - Oct. 2022 | Rust</h6>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+              <img class="slide" src="misc/ludum_dare/game.gif" alt="gameplay gif"/>
+              <img class="slide" src="misc/ludum_dare/ludum_dare.png" alt="image of the game"/>
+              <img class="slide" src="misc/ludum_dare/eng_game.gif" alt="gameplay gif"/>
             </div>
-            <p>I made this program to select some points of a mesh. The goal was to have a fast python module that allow the user to move easily in the scene and select some points of the mesh.
-            It supports two camera mode (absolute position and camera rotation OR fixed look at point). It is possible to switch between those two modes at any time.</p>
+          </section>
 
-            <a href="https://github.com/BricePrs/mesh_tools_py"  title="Project Repo" target="_blank">Source Code</a>
-          </div>
-          <div class="media-list">
-            <img src="misc/mesh_tools/mesh_tools.png" alt=""/>
-          </div>
         </div>
       </div>
 
@@ -142,23 +167,6 @@
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>OpenGL</h1>
-              <h6>Aug. 2022 | C++, OpenGL, Assimp</h6>
-            </div>
-            <p>I decided to learn openGL this summer. So I made this simple scene with multiple lights and a skybox (a spotlight is "attached" to the camera). It is possible to move into the scene.
-            I've use "Assimp" library to load the ship mesh with it's textures.
-            </p>
-          </div>
-          <div class="media-list">
-            <img src="misc/opengl_cpp/opengl-learning.png" alt="opengl scene"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="project" state="unfocused">
-        <div class="project-descr">
-          <div class="project-descr-text">
-            <div class="header-container">
               <h1>Inria Internship</h1>
               <h6>June. - July. 2022 | glsl</h6>
             </div>
@@ -169,11 +177,20 @@
             <p>I've obviously encountered bugs during this internship and one of those was particularly interesting, so I also put it below.</p>
             <a href="https://gitlab.inria.fr/vergne/gratin"  title="Gratin Repo" target="_blank">Gratin Repo</a>
           </div>
-          <div class="media-list">
-            <img src="misc/inria_internship/espace_killy.png" alt="before filter"/>
-            <img src="misc/inria_internship/espace_killy_render.png" alt="after filter"/>
-            <img src="misc/inria_internship/joli_bug.png" alt="Joli bug"/>
-          </div>
+
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+              <img class="slide" src="misc/inria_internship/espace_killy.png" alt="before filter"/>
+              <img class="slide" src="misc/inria_internship/espace_killy_render.png" alt="after filter"/>
+              <img class="slide" src="misc/inria_internship/joli_bug.png" alt="Joli bug"/>
+            </div>
+          </section>
         </div>
       </div>
 
@@ -192,11 +209,21 @@
               <li>An atmosphere simulation inspired by rayleight phenomenum (the planet is).</li>
             </ul>
           </div>
-          <div class="media-list">
-            <img src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.png" alt="image rendered by this raytracer"/>
-            <img src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.png" alt="image rendered by this raytracer"/>
-            <img src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.png" alt="image rendered by this raytracer"/>
-          </div>
+
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.png" alt="image rendered by this raytracer"/>
+            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.png" alt="image rendered by this raytracer"/>
+            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.png" alt="image rendered by this raytracer"/>
+            </div>
+          </section>
+
         </div>
       </div>
 
@@ -224,11 +251,19 @@
             <a href="misc/"  title="Project Repo" target="_blank">Source Code</a>
           </div>
 
-          <div class="media-list">
-            <img src="misc/python/particle-field.gif" alt="image of a python project"/>
-            <img src="misc/python/sphere.gif" alt="image of a python project"/>
-            <img src="misc/python/tokamak.png" alt="image of a python project"/>
-          </div>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+            <img class="slide" src="misc/python/particle-field.gif" alt="image of a python project"/>
+            <img class="slide" src="misc/python/sphere.gif" alt="image of a python project"/>
+            <img class="slide" src="misc/python/tokamak.png" alt="image of a python project"/>
+            </div>
+          </section>
         </div>
       </div>
     </div>
