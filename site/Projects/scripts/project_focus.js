@@ -108,7 +108,10 @@ for (let i = 0; i < slidesWrappers.length; ++i) {
     });
 
     prevButton.addEventListener("click", () => {
-        ImagesIndex[i] = Math.max(ImagesIndex[i]-1, 0);
+        ImagesIndex[i] = (ImagesIndex[i]-1)%slidesContainer.children.length;
+        if (ImagesIndex[i] < 0) {
+            ImagesIndex[i]+=slidesContainer.children.length;
+        }
         slidesContainer.scrollLeft = ImagesIndex[i]*slidesContainer.scrollWidth/slidesContainer.children.length;
     });
 }

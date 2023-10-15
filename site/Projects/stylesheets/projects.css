@@ -1,7 +1,7 @@
 
 @font-face {
-  font-family: Roboto;
-  src: url("../../../fonts/Roboto-Regular.ttf") format("truetype");
+  font-family: Raleway;
+  src: url("../../../fonts/Raleway-Regular.ttf") format("truetype");
 }
 
 
@@ -9,7 +9,7 @@
 html {
     background-color: #191919;
     font-size: 15px;
-    font-family: Roboto, serif;
+    font-family: Raleway, serif;
 }
 
 @media screen and (max-width: 500px) {
@@ -37,7 +37,7 @@ main {
 .project {
     background-color: #202020BB;
     max-width: 60%;
-    min-width: min(calc(100% - 4rem), 500px);
+    min-width: max(calc(60%), 500px);
     padding: 1rem 1rem 1rem 1rem;
     margin: 1rem 1rem 1rem 1rem;
     border-style: solid;
@@ -47,6 +47,8 @@ main {
     transition: 500ms;
     #overflow: scroll;
 }
+
+
 
 .header-container {
     display: flex;
@@ -61,9 +63,16 @@ main {
     border-width: 2px;
     border-color: #ec6957;
     transition: 300ms;
+    background-color: #191919;
+    cursor: default;
 }
 
+.project:hover h1 {
+    color: #ffffff;
+    transition: 700ms;
+}
 
+/*
 .project[state=focused] {
     background-color: #202020FF;
     height: calc(100vh - 2rem - 60px);
@@ -91,6 +100,8 @@ main {
     transition: 300ms;
 );
 }
+*/
+
 
 #empty {
     height: 100vh;
@@ -107,7 +118,7 @@ main {
 }
 .project * {
     color: #faf8f4;
-    font-size: 16px;
+    font-size: 1.2rem;
     text-align: justify;
     text-justify: inter-word;
 }
@@ -121,7 +132,7 @@ main {
     align-items: center;
 }
 
-
+/*
 *[state=shown] {
     transition: 300ms;
 }
@@ -147,6 +158,8 @@ main {
     max-width: 200px;
 }
 
+ */
+
 .project img {
     max-width: 60%;
     max-height: 100%;
@@ -154,7 +167,7 @@ main {
     width: auto;
     height: auto;
 
-    margin: 5px 5px 5px 5px;
+    margin: auto;
 }
 
 .project * a {
@@ -183,7 +196,7 @@ main {
 }
 
 .project h6 {
-    color: #e0b889;
+    color: #ad7878;
     font-size: 17px;
     margin: 15px 0 0 0;
     font-weight: bold;
@@ -205,7 +218,7 @@ main {
     margin-left: 20%;
     margin-right: 20%;
     position: relative;
-        overflow: hidden;
+    overflow: hidden;
     max-width: min(1000px, 95%);
     max-height: 20%;
     min-width: min(500px, 95%);
@@ -223,6 +236,8 @@ main {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
+  align-items: center;
+
 }
 
 .slides-container img {
@@ -270,10 +285,13 @@ main {
   width: 100%;
   height: 100%;
   flex: 1 0 100%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .slides-container {
-    scrollbar-width: none
+    scrollbar-width: none;
+    text-align: center;
 }
 
 .slides-container::-webkit-scrollbar {
@@ -281,3 +299,16 @@ main {
     background: transparent; /* make scrollbar transparent */
 }
 
+
+
+.project h2 {
+    font-size: 2rem;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+}
+
+.project:hover h2 {
+    font-size: 2.5rem;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+}

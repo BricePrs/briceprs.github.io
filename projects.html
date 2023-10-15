@@ -20,15 +20,13 @@
     </div>
     <nav id="nav" state="start">
       <a href="projects.html?reload=RELOAD_ON_SAVE" title="Show projects">Projects</a>
-      <a href="education.html?reload=RELOAD_ON_SAVE" title="Show education">Education</a>
+      <a href="about.html?reload=RELOAD_ON_SAVE" title="Show about">About</a>
     </nav>
   </header>
 
   <main>
     <canvas id="my_Canvas">
-      <div id="text">
-        <p>Hey, this is a test paragraph !</p>
-      </div>
+
     </canvas>
 
     <div class="project-list">
@@ -37,10 +35,98 @@
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Corys Internship</h1>
-              <h6>May. 2023 | C++ / HLSL / Unreal Engine 5</h6>
+              <h2>Currently learning Vulkan</h2>
             </div>
-            <p>Corys, an industry leader in railway training simulation, offers cost-effective solutions that eliminate the need for real trains and allow instructors to train multiple students on their own simulators. Their R&D team is actively transitioning from their old 3D engine to UE5 to enhance visual quality in their simulators. </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project" state="unfocused">
+        <div class="project-descr">
+          <div class="project-descr-text">
+            <div class="header-container">
+              <h1>C++ Physics Simulation</h1>
+              <h6>May. 2023 | C++ (School Project)</h6>
+            </div>
+            <p>For this project I implemented a physic simulation of particles that can be affected by some forces (gravity, lennard-jonnes potential) in 2D or 3D. The user can specify different parameters such as boundary behaviours or kinetic energy conservation. No libraries were used during this project, so a custom Vector class has been made in order to make the computations</p>
+            <p>The goal was to simulate many particle without having to wait too long especially since lennard-jonnes potential required small-time steps. Therefore data structure was an important part of this project. </p>
+            <p>The pictures below have been computed for a simulation of 8000 particles over almost 400 000 physics steps in 20 minutes on my laptop</p>
+            <a href="https://github.com/BricePrs/ProjetCpp"  title="Project Repo" target="_blank">Source Code</a>
+          </div>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-05-56.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-00.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-08.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-13.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-17.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-21.png" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-26.png" alt="simulation images"/></div>
+
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="project" state="unfocused">
+        <div class="project-descr">
+          <div class="project-descr-text">
+            <div class="header-container">
+              <h1>BlackSeas Game</h1>
+              <h6>Feb. 2023 - April. 2023 | Rust / OpenGl (School Project)</h6>
+            </div>
+            <p>This project is a school project were we decided the subject. I decided with 4 friends to make a game using a game engine I was making with one other member of this group.</p>
+            <p>The goal was to do everything from scratch, using only opengl and some other utility libraries. The objective was to make a multiplayer game were player could control a boat and navigate on an ocean.</p>
+            <p>Each member had a dedicated part for this project. Paul Colinot was in charge of the physics and collisions. Hélène Hassan worked on the ocean, following Tessendorf paper. Virgile Henry was working with me on the game engine architecture. He also made the 3D models and added the network part required for the multiplayer. I worked on the terrain generation, the lighting, postprocessing effects (raymarched clouds, gamma correction, tone mapping, bloom), materials and the dynamic skybox.
+            <p>Many things could have been done better during this project, however we only had a limited amount of time to spend on this. Finally, I want to explain that we tried to keep the game engine independent of the game, and it has also slowed us down, because it was not always easy to access some of the components we needed.</p>
+            <p>More details are available on the project report (in french) that we submitted, even though, due to some submissions constraints, some part of our work have been eluded.</p>
+            <a href="misc/Black_Seas_Report.pdf" title="Download Report" target="_blank">Download Report</a>
+            <a href="https://youtu.be/sW5rRquhCR0" title="Demo video" target="_blank">Demo video</a>
+            <a href="https://youtu.be/KE5luLySsBo" title="Demo video" target="_blank">Demo video</a>
+            <a href="https://github.com/VirgileHenry/black-seas"  title="Project Repo" target="_blank">Game Source Code</a>
+            <a href="https://github.com/VirgileHenry/gear"  title="Project Repo" target="_blank">Game Engine Source Code</a>
+
+
+          </div>
+          <section class="slider-wrapper">
+            <button class="slide-arrow slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow slide-arrow-next">
+              &#8250;
+            </button>
+            <div class="slides-container">
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-39.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-31.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-07-49.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-17 10-53-39.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-17.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-06-16.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-07-39.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-14-14.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-20.png" alt="simulation images"/></div>
+              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-02-06 19-58-20.png" alt="simulation images"/></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="project" state="unfocused">
+        <div class="project-descr">
+          <div class="project-descr-text">
+            <div class="header-container">
+              <h1>Corys Internship</h1>
+              <h6>May. 2023 - Sept.2023 | C++ / HLSL / Unreal Engine 5</h6>
+            </div>
+            <p>Corys is a manufacturer of training and engineering simulators for the rail transport, energy and hydrocarbon industries. Their R&D team is actively transitioning from their old 3D engine to UE5 to enhance visual quality in their simulators. </p>
             <p>During my 4 months internship I made new windscreen effect for rain, snow and dirtiness based on the ones in the previous motor.</p>
           </div>
           <section class="slider-wrapper">
@@ -50,7 +136,7 @@
             <button class="slide-arrow slide-arrow-next">
               &#8250;
             </button>
-            <div class="slides-container" id="slides-container">
+            <div class="slides-container">
               
             </div>
           </section>
@@ -65,7 +151,7 @@
               <h6>Nov. 2022 | Python (school project)</h6>
             </div>
             <p>This project's goal was to modify the mesh of a 3D scan of a face by approximating it first with a Bezier surface.</p>
-            <p>A cut is first performed to apply the least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
+            <p>A cut is first performed to apply a least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
               Then, the control points can be easily modified in order to get this final result. The approximated surface can then easily be knitted back to the original mesh with a screened Poisson surface reconstruction.</p>
           </div>
           <section class="slider-wrapper">
@@ -75,13 +161,13 @@
             <button class="slide-arrow slide-arrow-next">
               &#8250;
             </button>
-            <div class="slides-container" id="slides-container">
-              <img class="slide" src="misc/kinect/a.png" alt="selected mesh"/>
-              <img class="slide" src="misc/kinect/b.png" alt="control polyhedron"/>
-              <img class="slide" src="misc/kinect/c.png" alt="border constraints"/>
-              <img class="slide" src="misc/kinect/d.png" alt="control points with an offset"/>
-              <img class="slide" src="misc/kinect/e.png" alt="final result (not knitted)"/>
-              <img class="slide" src="misc/kinect/f.png" alt="final result closer look (not knitted)"/>
+            <div class="slides-container">
+              <div class="slide"><img class="slide" src="misc/kinect/a.png" alt="selected mesh"/></div>
+              <div class="slide"><img class="slide" src="misc/kinect/b.png" alt="control polyhedron"/></div>
+              <div class="slide"><img class="slide" src="misc/kinect/c.png" alt="border constraints"/></div>
+              <div class="slide"><img class="slide" src="misc/kinect/d.png" alt="control points with an offset"/></div>
+              <div class="slide"><img class="slide" src="misc/kinect/e.png" alt="final result (not knitted)"/></div>
+              <div class="slide"><img class="slide" src="misc/kinect/f.png" alt="final result closer look (not knitted)"/></div>
 
             </div>
           </section>
@@ -95,12 +181,13 @@
               <h1>Personal Website</h1>
               <h6>Oct. - Nov. 2022 | html, css, javascript, WebGL</h6>
             </div>
-            <p>I wasn't familiar with front end programing (nor interested) but I wanted to have a website to display my projects with a little bit more control than github allows. So I decided to make this website.</p>
+            <p>I wasn't familiar with front end programing (nor particularly interested) but I wanted to have a website in order to easily share my projects. So I decided to make this website. The goal here is not to have something perfect but something that works.</p>
             <p>I made it in roughly 3 weeks since I had to learn html/css and javascript as well as the specificity of WebGL compared to OpenGl 3.
-              The background animation is entirely made with WebGl (and javascript of course).
-              It is definitely far from being perfect and i guess the code could be cleaner (I'm not a javascript expert) but I don't wan't to spend to much time on it.
-              I've also tried to make as responsive as I could but it is hard when using WebGL (and I'm running out of time).
-              However, the user experience is definitely better on computer (if you are on a mobile, check it out on your computer). </p>
+              The background animation is entirely made with WebGl (and javascript of course). It consists of a vertex shader and a post-process fragment shader.
+              </p>
+            <p>
+              It is definitely far from being perfect and I guess the code could be cleaner (I'm no javascript expert) but I didn't want to spend too much time on it.
+              The user experience is definitely better on computer (if you are on a mobile, I recommend you to check it out on your computer). </p>
             <a href="https://github.com/BricePrs/briceprs.github.io"  title="Project Repo" target="_blank">Source Code</a>
           </div>
         </div>
@@ -129,9 +216,9 @@
               &#8250;
             </button>
             <div class="slides-container">
-              <img class="slide" src="misc/ludum_dare/game.gif" alt="gameplay gif"/>
-              <img class="slide" src="misc/ludum_dare/ludum_dare.png" alt="image of the game"/>
-              <img class="slide" src="misc/ludum_dare/eng_game.gif" alt="gameplay gif"/>
+              <div class="slide"><img class="slide" src="misc/ludum_dare/game.gif" alt="gameplay gif"/></div>
+              <div class="slide"><img class="slide" src="misc/ludum_dare/ludum_dare.png" alt="image of the game"/></div>
+              <div class="slide"><img class="slide" src="misc/ludum_dare/eng_game.gif" alt="gameplay gif"/></div>
             </div>
           </section>
 
@@ -145,7 +232,7 @@
               <h1>Rustracer</h1>
               <h6>Aug. 2022 | Rust</h6>
             </div>
-            <p>A basic raytracer implementation(on CPU) I've worked on in order to learn Rust</p>
+            <p>A basic raytracer implementation(on CPU) I've worked on in order to learn Rust following Raytracing in one weekend series. However, I decided to stop at this point because I wanted to make a GPU accelerated version of this project later.</p>
 
             <p>This raytracer can handle spheres, depth of field and three types of material:<p>
             <ul>
@@ -155,6 +242,9 @@
             </ul>
 
             <p>While computing the output image, the current state is displayed in a window managed on a different thread.</p>
+
+
+            <a href="https://raytracing.github.io/" target="_blank">Raytracing in one weekend series</a>
             <a href="https://github.com/BricePrs/Rustracer"  title="Project Repo" target="_blank">Source Code</a>
           </div>
           <div class="media-list">
@@ -172,9 +262,8 @@
             </div>
             <p>During this internship, I made an algorithm that filter a height map to generalise a terrain (see the before/after comparison below). </p>
             <p>For that, I used a software called Gratin designed by a member of the team I was in. This software allow to bind nodes.
-              Each node takes some textures in input execute a shader by sampling the texture and output a texture.</p>
-            <p>I have also worked on giving a "harsher" style to the shadows in order to mimic an artist style (Pierre Novat) whose son was helping the team (This effect can't be seen below).</p>
-            <p>I've obviously encountered bugs during this internship and one of those was particularly interesting, so I also put it below.</p>
+              Each node takes some textures in input execute a shader by sampling the textures and output a new one.</p>
+            <p>I've encountered some bugs during this internship and one of those was particularly interesting, so I also put the resulting image below.</p>
             <a href="https://gitlab.inria.fr/vergne/gratin"  title="Gratin Repo" target="_blank">Gratin Repo</a>
           </div>
 
@@ -186,9 +275,9 @@
               &#8250;
             </button>
             <div class="slides-container">
-              <img class="slide" src="misc/inria_internship/espace_killy.png" alt="before filter"/>
-              <img class="slide" src="misc/inria_internship/espace_killy_render.png" alt="after filter"/>
-              <img class="slide" src="misc/inria_internship/joli_bug.png" alt="Joli bug"/>
+              <div class="slide"><img class="slide" src="misc/inria_internship/espace_killy.png" alt="before filter"/></div>
+              <div class="slide"><img class="slide" src="misc/inria_internship/espace_killy_render.png" alt="after filter"/></div>
+              <div class="slide"><img class="slide" src="misc/inria_internship/joli_bug.png" alt="joli bug"/></div>
             </div>
           </section>
         </div>
@@ -206,7 +295,7 @@
             </p>
             <ul>
               <li>A scene that can handle multiple lights with different colors as well as reflections in a fragment shader (on shadertoy).</li>
-              <li>An atmosphere simulation inspired by rayleight phenomenum (the planet is).</li>
+              <li>An atmosphere simulation inspired by rayleight phenomenon (the planet is just a distorted sphere).</li>
             </ul>
           </div>
 
@@ -218,9 +307,9 @@
               &#8250;
             </button>
             <div class="slides-container">
-            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.png" alt="image rendered by this raytracer"/>
-            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.png" alt="image rendered by this raytracer"/>
-            <img class="slide" src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.png" alt="image rendered by this raytracer"/>
+            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.png" alt="image rendered by this raytracer"/></div>
+            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.png" alt="image rendered by this raytracer"/></div>
+            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.png" alt="image rendered by this raytracer"/></div>
             </div>
           </section>
 
@@ -248,7 +337,6 @@
               <li>A program drawing shapes with moving sphere with constraints.</li>
             </ul>
 
-            <a href="misc/"  title="Project Repo" target="_blank">Source Code</a>
           </div>
 
           <section class="slider-wrapper">
@@ -259,9 +347,9 @@
               &#8250;
             </button>
             <div class="slides-container">
-            <img class="slide" src="misc/python/particle-field.gif" alt="image of a python project"/>
-            <img class="slide" src="misc/python/sphere.gif" alt="image of a python project"/>
-            <img class="slide" src="misc/python/tokamak.png" alt="image of a python project"/>
+            <div class="slide"><img class="slide" src="misc/python/particle-field.gif" alt="image of a python project"/></div>
+            <div class="slide"><img class="slide" src="misc/python/sphere.gif" alt="image of a python project"/></div>
+            <div class="slide"><img class="slide" src="misc/python/tokamak.png" alt="image of a python project"/></div>
             </div>
           </section>
         </div>
