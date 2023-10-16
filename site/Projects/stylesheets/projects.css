@@ -37,7 +37,7 @@ main {
 .project {
     background-color: #202020BB;
     max-width: 60%;
-    min-width: max(calc(60%), 500px);
+    min-width: max(calc(60%), 330px);
     padding: 1rem 1rem 1rem 1rem;
     margin: 1rem 1rem 1rem 1rem;
     border-style: solid;
@@ -109,7 +109,13 @@ main {
 
 .project h1 {
     color: #faf8f4;
-    font-size: 30px;
+    transition-duration: 200ms;
+    font-size: 2rem;
+}
+
+.project:hover h1 {
+    transition-duration: 200ms;
+    font-size: 2.3rem;
 }
 
 .project h2 {
@@ -302,13 +308,13 @@ main {
 
 
 .project h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     transition-duration: 1s;
     transition-timing-function: ease-out;
 }
 
 .project:hover h2 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     transition-duration: 1s;
     transition-timing-function: ease-out;
 }

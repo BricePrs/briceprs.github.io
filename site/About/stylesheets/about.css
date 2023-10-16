@@ -43,7 +43,7 @@ header {
 }
 
 .column-div hr, .school-list hr {
-    color: #ef4040;
+    border-color: #ef4040;
     width: 40%;
     margin-top: 0;
 }
@@ -173,7 +173,7 @@ img {
 }
 
 #empty {
-    height: 20vh;
+    height: 50px;
 }
 
 p {
