@@ -277,7 +277,7 @@ main {
   top: 0;
   padding-left: 0.25rem;
   border-radius: 1rem;
-      touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 .slide-arrow-next {
@@ -286,7 +286,7 @@ main {
   top: 0;
   padding-left: 0.75rem;
   border-radius: 1rem;
-touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 .slide {
