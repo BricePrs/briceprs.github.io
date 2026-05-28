@@ -1,139 +1,163 @@
+(function () {
+    "use strict";
 
+    const projects = document.getElementsByClassName("project");
+    const header = document.getElementById("top-bar");
+    const navListIcon = document.getElementById("nav-list");
 
-const projects = document.getElementsByClassName("project");
-const main = document.getElementsByTagName("main")[0];
-const header = document.getElementById("top-bar");
+    let current_focus = null;
+    let focus_time = Date.now();
+    let scroll_offset_unfocus = 0;
 
-let current_focus = null;
-let date = new Date();
-let focus_time = date.getTime()
-
-function onClickEvent(event) {
-    if (event.target.closest(".slider-wrapper")) {
-        return;
-    }
-    let project = event.target.closest(".project");
-    let state = project.getAttribute("state");
-    unfocus_current()
-
-    if (state === "unfocused") {
-        current_focus = project;
-        date = new Date();
-        focus_time = date.getTime()
-
-        project.setAttribute("state", "focused")
-        window.scrollBy({
-            top: project.getBoundingClientRect().top - header.offsetHeight,
-            behavior: 'smooth'
-        });
-        let hide_able_elts = project.getElementsByClassName("hide-able");
-        for (let j = 0; j < hide_able_elts.length; j++) {
-            hide_able_elts[j].setAttribute("state", "shown");
-        }
-    }
-}
-
-nav_list_icon.addEventListener("click", onClickEvent);
-
-for (let i = 0; i < projects.length; i++) {
-    //projects[i].addEventListener("click", onClickEvent);
-}
-
-document.addEventListener("scroll", scroll_event);
-
-function scroll_event(event) {
-    //console.log(current_focus);
-    date = new Date();
-    if (!current_focus || (date.getTime()-focus_time) < 100) { return; }
-    if (Math.abs(current_focus.offsetTop - window.scrollY + scroll_offset_unfocus) > window.outerHeight/2.) {
-        unfocus_current();
-    }
-}
-
-function unfocus_current() {
-    if (!current_focus) {return;}
-    current_focus.setAttribute("state", "unfocused");
-    let hide_able_elts = current_focus.getElementsByClassName("hide-able");
-    for (let j = 0; j < hide_able_elts.length; j++) {
-        hide_able_elts[j].setAttribute("state", "hidden");
-    }
-    current_focus = null;
-}
-
-function unfocus_all() {
-    for (let i = 0; i < projects.length; i++) {
-        projects[i].setAttribute("state", "unfocused")
-        let hide_able_elts = projects[i].getElementsByClassName("hide-able");
+    function unfocus_current() {
+        if (!current_focus) return;
+        current_focus.setAttribute("state", "unfocused");
+        const hide_able_elts = current_focus.getElementsByClassName("hide-able");
         for (let j = 0; j < hide_able_elts.length; j++) {
             hide_able_elts[j].setAttribute("state", "hidden");
         }
+        current_focus = null;
     }
-}
 
-unfocus_all();
-
-let scroll_offset_unfocus = 0
-window.addEventListener("load", () => {
-    if (isMobile) {
-        scroll_offset_unfocus = 0;
+    function unfocus_all() {
+        for (let i = 0; i < projects.length; i++) {
+            projects[i].setAttribute("state", "unfocused");
+            const hide_able_elts = projects[i].getElementsByClassName("hide-able");
+            for (let j = 0; j < hide_able_elts.length; j++) {
+                hide_able_elts[j].setAttribute("state", "hidden");
+            }
+        }
     }
-    else {
-        scroll_offset_unfocus = 2.*window.outerHeight/3.;
+
+    function scroll_event() {
+        if (!current_focus || (Date.now() - focus_time) < 100) return;
+        if (Math.abs(current_focus.offsetTop - window.scrollY + scroll_offset_unfocus) > window.outerHeight / 2.) {
+            unfocus_current();
+        }
     }
-    setCarouselSize();
-});
 
+    if (navListIcon) {
+        navListIcon.addEventListener("click", function () {
+            unfocus_current();
+        });
+    }
+    document.addEventListener("scroll", scroll_event);
 
-// Images carousel
+    unfocus_all();
 
-
-
-const slidesWrappers = document.getElementsByClassName("slider-wrapper");
-const ImagesIndex = new Array(slidesWrappers.length);
-let goalWidth = 0.;
-
-
-
-for (let i = 0; i < slidesWrappers.length; ++i) {
-    const slide = slidesWrappers[i].querySelector(".slide");
-    const slidesContainer = slidesWrappers[i].getElementsByClassName("slides-container")[0];
-    const prevButton = slidesWrappers[i].getElementsByClassName("slide-arrow-prev")[0];
-    const nextButton = slidesWrappers[i].getElementsByClassName("slide-arrow-next")[0];
-    ImagesIndex[i] = 0;
-    //slidesWrappers[i].closest(".project").addEventListener("transitionend", setCarouselSize);
-
-    nextButton.addEventListener("click", () => {
-        ImagesIndex[i] = ((ImagesIndex[i]+1)%slidesContainer.children.length);
-        slidesContainer.scrollLeft = ImagesIndex[i]*slidesContainer.scrollWidth/slidesContainer.children.length;
+    window.addEventListener("load", () => {
+        const mobile = !!window.siteIsMobile;
+        scroll_offset_unfocus = mobile ? 0 : 2. * window.outerHeight / 3.;
     });
 
-    prevButton.addEventListener("click", () => {
-        ImagesIndex[i] = (ImagesIndex[i]-1)%slidesContainer.children.length;
-        if (ImagesIndex[i] < 0) {
-            ImagesIndex[i]+=slidesContainer.children.length;
-        }
-        slidesContainer.scrollLeft = ImagesIndex[i]*slidesContainer.scrollWidth/slidesContainer.children.length;
-    });
-}
+    // ===== Image carousels =====
+    const wrappers = document.querySelectorAll(".slider-wrapper");
+    wrappers.forEach(initCarousel);
 
-function setCarouselSize() {
-    for (let i = 0; i < slidesWrappers.length; ++i) {
-        const slidesContainer = slidesWrappers[i].getElementsByClassName("slides-container")[0];
-        goalWidth = slidesContainer.clientWidth;
-        ImagesIndex[i] = 0;
+    function initCarousel(wrapper) {
+        const container = wrapper.querySelector(".slides-container");
+        const slides = container ? Array.from(container.children) : [];
+        const prev = wrapper.querySelector(".slide-arrow-prev");
+        const next = wrapper.querySelector(".slide-arrow-next");
 
-        for (let j = 0; j < slidesContainer.children.length; ++j) {
-            let currentWidth = slidesContainer.children[j].offsetWidth;
-            slidesContainer.children[j].style.marginLeft = (goalWidth - currentWidth) / 2 + "px";
-            slidesContainer.children[j].style.marginRight = (goalWidth - currentWidth) / 2 + "px";
+        if (!container || slides.length === 0) return;
+
+        // Hide controls entirely if there is only one image
+        if (slides.length <= 1) {
+            wrapper.setAttribute("data-single", "");
+            return;
         }
 
-        slidesContainer.scrollLeft = ImagesIndex[i]*slidesContainer.scrollWidth/slidesContainer.children.length;
+        // Build dot indicators
+        const dotsContainer = document.createElement("div");
+        dotsContainer.className = "slide-dots";
+        dotsContainer.setAttribute("role", "tablist");
+        slides.forEach((_, idx) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "slide-dot";
+            dot.setAttribute("role", "tab");
+            dot.setAttribute("aria-label", `Go to image ${idx + 1} of ${slides.length}`);
+            dot.addEventListener("click", () => goTo(idx));
+            dotsContainer.appendChild(dot);
+        });
+        wrapper.appendChild(dotsContainer);
+        const dots = Array.from(dotsContainer.children);
 
+        // Counter "n / total"
+        const counter = document.createElement("div");
+        counter.className = "slide-counter";
+        counter.setAttribute("aria-hidden", "true");
+        wrapper.appendChild(counter);
 
+        let currentIndex = 0;
+        let userScrolling = false;
+        let scrollEndTimer = null;
+
+        function goTo(index, smooth = true) {
+            const n = slides.length;
+            currentIndex = ((index % n) + n) % n;
+            container.scrollTo({
+                left: currentIndex * container.clientWidth,
+                behavior: smooth ? "smooth" : "auto",
+            });
+            updateUI();
+        }
+
+        function updateUI() {
+            dots.forEach((dot, i) => {
+                const active = i === currentIndex;
+                dot.classList.toggle("is-active", active);
+                dot.setAttribute("aria-selected", active ? "true" : "false");
+            });
+            counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+        }
+
+        prev.setAttribute("type", "button");
+        next.setAttribute("type", "button");
+        prev.addEventListener("click", () => goTo(currentIndex - 1));
+        next.addEventListener("click", () => goTo(currentIndex + 1));
+
+        // Sync index when the user scrolls (touch swipe, trackpad)
+        container.addEventListener("scroll", () => {
+            userScrolling = true;
+            clearTimeout(scrollEndTimer);
+            scrollEndTimer = setTimeout(() => {
+                userScrolling = false;
+                const w = container.clientWidth;
+                if (w <= 0) return;
+                const newIndex = Math.round(container.scrollLeft / w);
+                if (newIndex !== currentIndex && newIndex >= 0 && newIndex < slides.length) {
+                    currentIndex = newIndex;
+                    updateUI();
+                }
+            }, 90);
+        }, { passive: true });
+
+        // Keyboard navigation when carousel has focus
+        wrapper.tabIndex = 0;
+        wrapper.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft")       { goTo(currentIndex - 1); e.preventDefault(); }
+            else if (e.key === "ArrowRight") { goTo(currentIndex + 1); e.preventDefault(); }
+            else if (e.key === "Home")       { goTo(0);                e.preventDefault(); }
+            else if (e.key === "End")        { goTo(slides.length - 1);e.preventDefault(); }
+        });
+
+        // On resize the slide width changes — snap back to current slide without animation
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (!userScrolling) goTo(currentIndex, false);
+            }, 100);
+        });
+
+        // First image might decode after init — re-snap once it does so layout settles
+        const firstImg = slides[0].querySelector("img");
+        if (firstImg && !firstImg.complete) {
+            firstImg.addEventListener("load", () => goTo(currentIndex, false), { once: true });
+        }
+
+        updateUI();
     }
-}
-
-
-
-
+})();

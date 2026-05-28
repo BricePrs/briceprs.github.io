@@ -1,9 +1,4 @@
 
-@font-face {
-  font-family: Raleway;
-  src: url("../../../fonts/Raleway-Regular.ttf") format("truetype");
-}
-
 header {
     position: static;
 }
@@ -13,6 +8,8 @@ header {
     top: 30px;
     display: flex;
     flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 0 1rem;
 }
 
 @media screen and (max-width: 650px) {
@@ -21,7 +18,6 @@ header {
     }
 }
 
-
 .school-list {
     text-align: center;
 }
@@ -29,29 +25,30 @@ header {
 .column-div p {
     color: #eae0eb;
     text-align: justify;
-    margin: 30px 5% 30px 5%;
+    margin: 1.5rem 5%;
     min-width: calc(max(200px, 60%));
     font-size: 1.4rem;
+    line-height: 1.55;
 }
 
 .about-me > h1, .school-list > h1  {
     text-align: center;
     color: #ef4040;
-    margin: 0 40% 0 40%;
+    margin: 0;
     padding: 0;
     font-size: 2.4rem;
 }
 
 .column-div hr, .school-list hr {
-    border-color: #ef4040;
+    border: 0;
+    border-top: 2px solid #ef4040;
     width: 40%;
-    margin-top: 0;
+    margin: 0.4rem auto 1rem auto;
 }
 
 .about-me {
     flex: 300%;
 }
-
 
 #CVbutton {
     position: fixed;
@@ -63,24 +60,20 @@ header {
     font-weight: bold;
     text-decoration: none;
     color: #ffffff;
-    padding: .5rem 1rem .5rem 1rem;
-    transition: 300ms;
+    padding: .5rem 1rem;
+    transition: 200ms ease;
     z-index: 5;
     background: linear-gradient(0.3turn, #a22d2d, #ff0000);
-    border-radius: 5px;
+    border-radius: 8px;
     margin-bottom: 10px;
     margin-right: 10px;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.2);
 }
 
-#CVbutton:hover {
-    transition: 300ms;
-    font-size: 1.7rem;
-}
-
-
-@font-face {
-  font-family: Raleway;
-  src: url("../../../fonts/Raleway-Regular.ttf") format("truetype");
+#CVbutton:hover,
+#CVbutton:focus-visible {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 22px rgba(255, 0, 0, 0.35);
 }
 
 * {
@@ -88,33 +81,32 @@ header {
 }
 body {
     all: unset;
+    display: block;
 }
 
 .school-list {
     position: relative;
-    justify-content: space-around;
-    display: flex;
-    flex-wrap: wrap;
     z-index: 2;
-    column-gap: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
 }
 
 .school {
     background-color: #202020BB;
-    width: 90%;
-    padding: 2rem 1rem 2.5rem 1rem;
-    margin: 20px 10px 20px 10px;
-    border-style: solid;
-    border-radius: 3px;
-    border-color: #202020BB;
-    border-width: 2px;
-    transition: 500ms;
+    width: auto;
+    padding: 1.5rem 1.25rem;
+    margin: 12px 10px;
+    border: 2px solid #202020BB;
+    border-radius: 6px;
+    transition: border-color 250ms ease, transform 250ms ease;
     overflow-y: clip;
 }
 
-.school:hover h1 {
+.school:hover h2 {
     color: #f55454;
-    transition: 700ms;
+    transition: 500ms ease;
 }
 
 .header-container {
@@ -123,52 +115,56 @@ body {
     justify-content: space-between;
     text-align: left;
     column-gap: 3rem;
+    flex-wrap: wrap;
 }
 
 .school:hover {
-    border-style: solid;
-    border-radius: 3px;
-    border-width: 2px;
     border-color: #ef4040;
-    transition: 300ms;
+    transition: 250ms ease;
+    transform: translateY(-2px);
 }
 
-.school h1 {
-    color: #f3eedd;
-    font-size: 1.3rem;
-}
-
+.school h1,
 .school h2 {
     color: #f3eedd;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin: 0;
 }
+
 .school {
     color: #f3eedd;
     font-size: 1.2rem;
     text-align: justify;
     text-justify: inter-word;
+    line-height: 1.5;
 }
 
 .media-list {
-    margin: 10px 10px 10px 10px;
+    margin: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
 .school h6 {
-    flex: 100%;
     color: #ad7878;
     font-size: 1rem;
-    margin: 15px 0 0 0;
+    margin: 0;
     font-weight: bold;
-    width: min(15rem, 35%);
-    text-align: right;
+    white-space: nowrap;
 }
 
-img {
-    border-radius: 49%;
-    scale: 85%;
+/* Only target the portrait image — NOT every image on the page */
+#portrait {
+    border-radius: 50%;
+    transform: scale(.85);
+    max-width: 70%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 1rem auto;
+    display: block;
+    border: 3px solid #2a2a2a;
 }
 
 #empty {
@@ -177,4 +173,36 @@ img {
 
 p {
     font-size: 1.2rem;
+    line-height: 1.55;
+}
+
+.contact-heading {
+    color: #ef4040;
+    font-size: 1.6rem;
+    margin: 2rem 0 0.5rem 5%;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 5% 2rem 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+}
+
+.contact-list a {
+    color: #f3eedd;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #ffffff15;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.contact-list a:hover,
+.contact-list a:focus-visible {
+    background: #ffffff25;
+    color: #ef4040;
 }

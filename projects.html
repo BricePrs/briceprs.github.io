@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Brice Peres</title>
+  <title>Projects — Brice Peres</title>
+  <meta name="author" content="Brice Peres">
+  <meta name="description" content="Computer graphics, rendering and simulation projects by Brice Peres — raytracing, soft-body simulation, shaders, game development and more.">
+  <meta name="theme-color" content="#191919">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://briceprs.github.io/projects.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Projects — Brice Peres">
+  <meta property="og:description" content="Computer graphics, rendering and simulation projects by Brice Peres.">
+  <meta property="og:image" content="https://briceprs.github.io/misc/Raytracing/Screenshot%20from%202024-09-27%2001-40-23.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="fonts/Raleway-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="lib/stylesheets/default.css"/>
   <link rel="stylesheet" href="site/Projects/stylesheets/projects.css"/>
   <link rel="stylesheet" href="lib/stylesheets/canvas.css"/>
@@ -13,431 +26,361 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
   <header>
     <div id="top-bar">
-      <a href="index.html?reload=RELOAD_ON_SAVE" title="Home page" id="home-button">Brice Peres</a>
-      <input id="nav-list" type="image" name="List Icon" src="misc/list_icon.png" alt="list_icon"/>
+      <a href="index.html" title="Home page" id="home-button">Brice Peres</a>
+      <button id="nav-list" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav">
+        <span class="nav-bar"></span>
+        <span class="nav-bar"></span>
+        <span class="nav-bar"></span>
+      </button>
     </div>
-    <nav id="nav" state="start">
-      <a href="projects.html?reload=RELOAD_ON_SAVE" title="Show projects">Projects</a>
-      <a href="about.html?reload=RELOAD_ON_SAVE" title="Show about">About</a>
+    <nav id="nav" state="start" aria-label="Primary">
+      <a href="projects.html" title="Show projects" aria-current="page">Projects</a>
+      <a href="about.html" title="Show about">About</a>
     </nav>
   </header>
 
-  <main>
-    <canvas id="my_Canvas">
+  <main id="main-content">
+    <canvas id="my_Canvas" aria-hidden="true"></canvas>
 
-    </canvas>
+    <section class="project-list" aria-label="Projects">
 
-    <div class="project-list">
-
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>SoftBody CUDA simulation</h1>
-              <h6>Dec. 2024 | C++ (School Project)</h6>
+              <h1>Soft-body CUDA simulation</h1>
+              <h6>Dec. 2024 | C++ / CUDA (School project)</h6>
             </div>
-            <p>This project goal was to simulate a Softbody with CUDA. It is based on a spring-mass model.</p>
+            <p>The goal of this project was to simulate a soft body using CUDA. It is based on a spring-mass model.</p>
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Soft-body simulation media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-
-              <div class="slide"><img src="misc/Softbody/Peek%202024-09-27%2002-40.gif" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Softbody/Peek%202024-09-27%2002-46.gif" alt="anim images"/></div>
-
+              <div class="slide"><img src="misc/Softbody/Peek%202024-09-27%2002-40.gif" loading="lazy" alt="Soft-body simulation animated screen capture"/></div>
+              <div class="slide"><img src="misc/Softbody/Peek%202024-09-27%2002-46.gif" loading="lazy" alt="Soft-body deforming under gravity"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
               <h1>Raytracing II</h1>
-              <h6>Dec. 2024 | C++ (School Project)</h6>
+              <h6>Dec. 2024 | C++ / OpenGL (School project)</h6>
             </div>
-            <p>I made a raytracer in opengl. It builds a BVH for any mesh (this bit of code was given by the teacher, I've done pretty everything else). A shader then accumulates each frame in order to yield better results.</p>
-            <p>It supports shadows, reflections, transparency, env maps, and uses Cook-Torrance specular reflectance model with microfacet distributions and GGX distribution.</p>
-            <p>The following results were generated in a few seconds at most.
+            <p>I built a raytracer in OpenGL. It builds a BVH for any mesh (this bit of code was given by the teacher; I did pretty much everything else). A shader then accumulates each frame to yield better results.</p>
+            <p>It supports shadows, reflections, transparency, environment maps, and uses the Cook&ndash;Torrance specular reflectance model with microfacet distributions and a GGX distribution.</p>
+            <p>The results below were generated in a few seconds at most.</p>
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Raytracing renders">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-
-              <div class="slide"><img src="misc/Raytracing/oui.gif" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-40-23.png" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-41-24.png" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-45-32.png" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-46-51.png" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Raytracing/Peek%202024-09-27%2001-39.gif" alt="anim images"/></div>
-
+              <div class="slide"><img src="misc/Raytracing/oui.gif" loading="lazy" alt="Raytraced animation"/></div>
+              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-40-23.png" loading="lazy" alt="Raytraced scene with reflections"/></div>
+              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-41-24.png" loading="lazy" alt="Raytraced scene with transparency"/></div>
+              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-45-32.png" loading="lazy" alt="Raytraced scene with environment map"/></div>
+              <div class="slide"><img src="misc/Raytracing/Screenshot%20from%202024-09-27%2001-46-51.png" loading="lazy" alt="Cook–Torrance shaded materials"/></div>
+              <div class="slide"><img src="misc/Raytracing/Peek%202024-09-27%2001-39.gif" loading="lazy" alt="Animated raytraced sequence"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Skeleton Animation and skinning</h1>
-              <h6>Dec. 2024 | C++ (School Project)</h6>
+              <h1>Skeleton animation and skinning</h1>
+              <h6>Dec. 2024 | C++ (School project)</h6>
             </div>
-            <p>I made a program that parses BVH file, compute skeleton position and apply skinning algorithm </p>
+            <p>I wrote a program that parses BVH files, computes the skeleton's positions and applies a skinning algorithm.</p>
           </div>
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Skinning animation media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-
-              <div class="slide"><img src="misc/Anim/Peek%202024-09-26%2023-42.gif" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Anim/Peek%202024-09-26%2023-43.gif" alt="anim images"/></div>
-              <div class="slide"><img src="misc/Anim/ouioui.gif" alt="anim images"/></div>
-
+              <div class="slide"><img src="misc/Anim/Peek%202024-09-26%2023-42.gif" loading="lazy" alt="Skinned character walking animation"/></div>
+              <div class="slide"><img src="misc/Anim/Peek%202024-09-26%2023-43.gif" loading="lazy" alt="Skinned character animation"/></div>
+              <div class="slide"><img src="misc/Anim/ouioui.gif" loading="lazy" alt="Skinned character demo"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>C++ Physics Simulation</h1>
-              <h6>May. 2023 | C++ (School Project)</h6>
+              <h1>C++ physics simulation</h1>
+              <h6>May 2023 | C++ (School project)</h6>
             </div>
-            <p>For this project I implemented a physic simulation of particles that can be affected by some forces (gravity, lennard-jonnes potential) in 2D or 3D. The user can specify different parameters such as boundary behaviours or kinetic energy conservation. No libraries were used during this project, so a custom Vector class has been made in order to make the computations</p>
-            <p>The goal was to simulate many particle without having to wait too long especially since lennard-jonnes potential required small-time steps. Therefore data structure was an important part of this project. </p>
-            <p>The pictures below have been computed for a simulation of 8000 particles over almost 400 000 physics steps in 20 minutes on my laptop</p>
-            <a href="https://github.com/BricePrs/ProjetCpp"  title="Project Repo" target="_blank">Source Code</a>
+            <p>For this project I implemented a physics simulation of particles that can be affected by various forces (gravity, Lennard-Jones potential) in 2D or 3D. The user can specify different parameters such as boundary behaviours or kinetic energy conservation. No external libraries were used, so a custom vector class was written to handle the computations.</p>
+            <p>The goal was to simulate many particles without having to wait too long, especially since the Lennard-Jones potential requires small time steps. The data structure was therefore an important part of this project.</p>
+            <p>The pictures below have been computed for a simulation of 8,000 particles over almost 400,000 physics steps in 20 minutes on my laptop.</p>
+            <a href="https://github.com/BricePrs/ProjetCpp" title="Project repository" target="_blank" rel="noopener">Source code</a>
           </div>
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Physics simulation renders">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-05-56.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-00.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-08.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-13.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-17.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-21.jpg" alt="simulation images"/></div>
-              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-26.jpg" alt="simulation images"/></div>
-
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-05-56.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-00.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-08.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-13.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-17.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-21.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
+              <div class="slide"><img src="misc/cppphysicssim/Screenshot from 2023-05-20 15-06-26.jpg" loading="lazy" alt="Particle simulation snapshot"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>BlackSeas Game</h1>
-              <h6>Feb. 2023 - April. 2023 | Rust / OpenGl (School Project)</h6>
+              <h1>Black Seas game</h1>
+              <h6>Feb. 2023 &mdash; Apr. 2023 | Rust / OpenGL (School project)</h6>
             </div>
-            <p>This project is a school project where we decided the subject. I decided with 4 friends to make a game using a game engine I was making with one other member of this group.</p>
-            <p>The goal was to do everything from scratch, using only opengl and some other utility libraries. The objective was to make a multiplayer game where player could control a boat and navigate on an ocean.</p>
-            <p>Each member had a dedicated part for this project. Paul Colinot was in charge of the physics and collisions. Hélène Hassan worked on the ocean, following Tessendorf paper. Virgile Henry was working with me on the game engine architecture. He also made the 3D models and added the network part required for the multiplayer. I worked on the terrain generation, the lighting, postprocessing effects (raymarched clouds, gamma correction, tone mapping, bloom), materials and the dynamic skybox.
-            <p>Many things could have been done better during this project, however we only had a limited amount of time to spend on this. Finally, I want to explain that we tried to keep the game engine independent of the game, and it has also slowed us down, because it was not always easy to access some of the components we needed.</p>
-            <p>More details are available on the project report (in french) that we submitted, even though, due to some submissions constraints, some part of our work have been eluded.</p>
-            <a href="misc/Black_Seas_Report.pdf" title="Download Report" target="_blank">Download Report</a>
-            <a href="https://youtu.be/sW5rRquhCR0" title="Demo video" target="_blank">Demo video</a>
-            <a href="https://youtu.be/KE5luLySsBo" title="Demo video" target="_blank">Demo video</a>
-            <a href="https://github.com/VirgileHenry/black-seas"  title="Project Repo" target="_blank">Game Source Code</a>
-            <a href="https://github.com/VirgileHenry/gear"  title="Project Repo" target="_blank">Game Engine Source Code</a>
-
-
+            <p>This is a school project for which we chose the subject. With four friends, we decided to make a game using a game engine that I was developing together with one other member of the group.</p>
+            <p>The goal was to do everything from scratch, using only OpenGL and a few utility libraries. The objective was a multiplayer game in which players control a boat and navigate on an ocean.</p>
+            <p>Each member had a dedicated part of the project. Paul Colinot was in charge of physics and collisions. Hélène Hassan worked on the ocean, following Tessendorf's paper. Virgile Henry worked with me on the game engine architecture; he also made the 3D models and added the network code required for multiplayer. I worked on terrain generation, lighting, post-processing effects (ray-marched clouds, gamma correction, tone mapping, bloom), materials and the dynamic skybox.</p>
+            <p>Many things could have been done better during this project; however, we only had a limited amount of time. We also tried to keep the game engine independent of the game, which slowed us down somewhat because it was not always easy to access the components we needed.</p>
+            <p>More details are available in the project report (in French) that we submitted, although due to some submission constraints, parts of our work were left out.</p>
+            <a href="misc/Black_Seas_Report.pdf" title="Download report (PDF)" target="_blank" rel="noopener">Download report</a>
+            <a href="https://youtu.be/sW5rRquhCR0" title="Demo video" target="_blank" rel="noopener">Demo video</a>
+            <a href="https://youtu.be/KE5luLySsBo" title="Demo video" target="_blank" rel="noopener">Demo video</a>
+            <a href="https://github.com/VirgileHenry/black-seas" title="Project repository" target="_blank" rel="noopener">Game source code</a>
+            <a href="https://github.com/VirgileHenry/gear" title="Project repository" target="_blank" rel="noopener">Game engine source code</a>
           </div>
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Black Seas screenshots">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-39.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-31.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-07-49.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-17 10-53-39.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-17.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-06-16.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-07-39.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-14-14.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-05-16 18-05-20.jpg" alt="simulation images"/></div>
-              <div class="slide"><img class="slide" Src="misc/blackseas/Screenshot from 2023-02-06 19-58-20.jpg" alt="simulation images"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-05-39.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-05-31.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-07-49.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-17 10-53-39.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-05-17.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-06-16.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-07-39.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-14-14.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-05-16 18-05-20.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
+              <div class="slide"><img src="misc/blackseas/Screenshot from 2023-02-06 19-58-20.jpg" loading="lazy" alt="Black Seas screenshot"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Corys Internship</h1>
-              <h6>May. 2023 - Sept.2023 | C++ / HLSL / Unreal Engine 5</h6>
+              <h1>Corys internship</h1>
+              <h6>May 2023 &mdash; Sept. 2023 | C++ / HLSL / Unreal Engine 5</h6>
             </div>
-            <p>Corys is a manufacturer of training and engineering simulators for the rail transport, energy and hydrocarbon industries. Their R&D team is actively transitioning from their old 3D engine to UE5 to enhance visual quality in their simulators. </p>
-            <p>During my 4 months internship I made new windscreen effect for rain, snow and dirtiness based on the ones in the previous engine. It was really challenging to create such effects with many constraints.</p>
+            <p>Corys is a manufacturer of training and engineering simulators for the rail transport, energy and hydrocarbon industries. Their R&amp;D team is actively transitioning from their old 3D engine to UE5 to enhance the visual quality of their simulators.</p>
+            <p>During my four-month internship I implemented new windscreen effects for rain, snow and dirt based on those of the previous engine. It was quite challenging to create such effects given the many constraints.</p>
           </div>
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
-            <div class="slides-container">
-              
-            </div>
-          </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
               <h1>Face deformation</h1>
-              <h6>Nov. 2022 | Python (school project)</h6>
+              <h6>Nov. 2022 | Python (School project)</h6>
             </div>
-            <p>This project's goal was to modify the mesh of a 3D scan of a face by approximating it first with a Bezier surface.</p>
-            <p>A cut is first performed to apply a least squared approximation with constraint around the borders to compute a grid of control points for our Bezier surface.
-              Then, the control points can be easily modified in order to get this final result. The approximated surface can then easily be knitted back to the original mesh with a screened Poisson surface reconstruction.</p>
+            <p>This project's goal was to modify the mesh of a 3D scan of a face by first approximating it with a Bézier surface.</p>
+            <p>A cut is first performed to apply a least-squares approximation with constraints around the borders, in order to compute a grid of control points for our Bézier surface. The control points can then be easily modified to obtain this final result. The approximated surface can finally be knitted back to the original mesh with a screened Poisson surface reconstruction.</p>
           </div>
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Face deformation media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-              <div class="slide"><img class="slide" src="misc/kinect/f.jpg" alt="final result closer look (not knitted)"/></div>
-              <div class="slide"><img class="slide" src="misc/kinect/a.jpg" alt="selected mesh"/></div>
-              <div class="slide"><img class="slide" src="misc/kinect/b.jpg" alt="control polyhedron"/></div>
-              <div class="slide"><img class="slide" src="misc/kinect/c.jpg" alt="border constraints"/></div>
-              <div class="slide"><img class="slide" src="misc/kinect/d.jpg" alt="control points with an offset"/></div>
-              <div class="slide"><img class="slide" src="misc/kinect/e.jpg" alt="final result (not knitted)"/></div>
-
+              <div class="slide"><img src="misc/kinect/f.jpg" loading="lazy" alt="Final result, closer look (not knitted)"/></div>
+              <div class="slide"><img src="misc/kinect/a.jpg" loading="lazy" alt="Selected mesh"/></div>
+              <div class="slide"><img src="misc/kinect/b.jpg" loading="lazy" alt="Control polyhedron"/></div>
+              <div class="slide"><img src="misc/kinect/c.jpg" loading="lazy" alt="Border constraints"/></div>
+              <div class="slide"><img src="misc/kinect/d.jpg" loading="lazy" alt="Control points with an offset"/></div>
+              <div class="slide"><img src="misc/kinect/e.jpg" loading="lazy" alt="Final result (not knitted)"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Personal Website</h1>
-              <h6>Oct. - Nov. 2022 | html, css, javascript, WebGL</h6>
+              <h1>Personal website</h1>
+              <h6>Oct. &mdash; Nov. 2022 | HTML, CSS, JavaScript, WebGL</h6>
             </div>
-            <p>I wasn't familiar with front end programing (nor particularly interested) but I wanted to have a website in order to easily share my projects. So I decided to make this website. The goal here is not to have something perfect but something that works.</p>
-            <p>I made it in roughly 3 weeks since I had to learn html/css and javascript as well as the specificity of WebGL compared to OpenGl 3.
-              The background animation is entirely made with WebGl. It consists of a vertex shader and a post-process fragment shader.
-              </p>
-            <p>
-              It is definitely far from being perfect and I guess the code could be cleaner (I'm no javascript expert) but I didn't want to spend too much time on it.
-              The user experience is definitely better on computer (if you are on a mobile, I recommend you to check it out on your computer). </p>
-            <a href="https://github.com/BricePrs/briceprs.github.io"  title="Project Repo" target="_blank">Source Code</a>
+            <p>I wasn't familiar with front-end programming (nor particularly interested in it), but I wanted to have a website to easily share my projects. So I decided to make this one. The goal was not to have something perfect, but something that works.</p>
+            <p>I built it in roughly three weeks, since I had to learn HTML, CSS and JavaScript, as well as the specifics of WebGL compared to OpenGL 3. The background animation is entirely made with WebGL: it consists of a vertex shader and a post-process fragment shader.</p>
+            <p>It is definitely far from perfect, and the code could be cleaner (I'm no JavaScript expert), but I didn't want to spend too much time on it.</p>
+            <a href="https://github.com/BricePrs/briceprs.github.io" title="Project repository" target="_blank" rel="noopener">Source code</a>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Seismic Panic Game</h1>
+              <h1>Seismic Panic (Game)</h1>
               <h6>Oct. 1st 2022 | Unity, C#</h6>
             </div>
-            <p>I made this game with a friend during ludum dare 51 game jam.
-              It was made using Unity in under 24 hours as our participation was a last minute decision (compared to 72 hours usually).
-              We ended up 501st out of 1703 participants.
-            </p>
-            <a href="https://ldjam.com/events/ludum-dare/51/seismic-panic"  title="Project Repo" target="_blank">Ludum dare</a>
-            <a href="http://virgile.henry.free.fr/games/SeismicPanic/"  title="Play game" target="_blank">Play Game</a>
+            <p>I made this game with a friend during the Ludum Dare 51 game jam. It was made using Unity in under 24 hours, as our participation was a last-minute decision (compared to 72 hours usually). We ended up 501st out of 1,703 participants.</p>
+            <a href="https://ldjam.com/events/ludum-dare/51/seismic-panic" title="Ludum Dare page" target="_blank" rel="noopener">Ludum Dare</a>
+            <a href="http://virgile.henry.free.fr/games/SeismicPanic/" title="Play the game" target="_blank" rel="noopener">Play game</a>
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Seismic Panic media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-              <div class="slide"><img class="slide" src="misc/ludum_dare/game.gif" alt="gameplay gif"/></div>
-              <div class="slide"><img class="slide" src="misc/ludum_dare/ludum_dare.jpg" alt="image of the game"/></div>
-              <div class="slide"><img class="slide" src="misc/ludum_dare/eng_game.gif" alt="gameplay gif"/></div>
+              <div class="slide"><img src="misc/ludum_dare/game.gif" loading="lazy" alt="Seismic Panic gameplay"/></div>
+              <div class="slide"><img src="misc/ludum_dare/ludum_dare.jpg" loading="lazy" alt="Seismic Panic screenshot"/></div>
+              <div class="slide"><img src="misc/ludum_dare/eng_game.gif" loading="lazy" alt="Seismic Panic gameplay"/></div>
             </div>
           </section>
 
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Raytracer in rust</h1>
+              <h1>Raytracer in Rust</h1>
               <h6>Aug. 2022 | Rust</h6>
             </div>
-            <p>A basic raytracer implementation(on CPU) I've worked on in order to learn Rust following Raytracing in one weekend series.</p>
-
-            <p>This raytracer can handle spheres, depth of field and three types of material:
+            <p>A basic CPU raytracer I worked on to learn Rust, following the "Raytracing in One Weekend" series.</p>
+            <p>This raytracer can handle spheres, depth of field and three types of material:</p>
             <ul>
-            <li>Lambertian</li>
-            <li>Dielectric</li>
-            <li>Metalic</li>
+              <li>Lambertian</li>
+              <li>Dielectric</li>
+              <li>Metallic</li>
             </ul>
-            However, I decided to stop at this point because I wanted to make a GPU accelerated version of this project later.<p>
-
+            <p>I decided to stop at this point because I wanted to make a GPU-accelerated version of the project later.</p>
             <p>While computing the output image, the current state is displayed in a window managed on a different thread.</p>
 
-
-            <a href="https://raytracing.github.io/" target="_blank">Raytracing in one weekend series</a>
-            <a href="https://github.com/BricePrs/Rustracer"  title="Project Repo" target="_blank">Source Code</a>
+            <a href="https://raytracing.github.io/" target="_blank" rel="noopener">Raytracing in One Weekend series</a>
+            <a href="https://github.com/BricePrs/Rustracer" title="Project repository" target="_blank" rel="noopener">Source code</a>
           </div>
           <div class="media-list">
-            <img src="misc/raytracer/raytracing.jpg" alt="image rendered by this raytracer"/>
+            <img src="misc/raytracer/raytracing.jpg" loading="lazy" alt="Image rendered by this raytracer"/>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
-              <h1>Inria Internship</h1>
-              <h6>June. - July. 2022 | glsl</h6>
+              <h1>Inria internship</h1>
+              <h6>June &mdash; July 2022 | GLSL</h6>
             </div>
-            <p>During this internship, I made an algorithm that filter a height map to generalise a terrain (see the before/after comparison below). </p>
-            <p>For that, I used a software called Gratin designed by a member of the team I was in. This software allow to bind nodes.
-              Each node takes some textures in input execute a shader by sampling the textures and output a new one.</p>
-            <p>I've encountered some bugs during this internship and one of those was particularly interesting, so I also put the resulting image below.</p>
-            <a href="https://gitlab.inria.fr/vergne/gratin"  title="Gratin Repo" target="_blank">Gratin Repo</a>
+            <p>During this internship, I designed an algorithm that filters a heightmap to generalise a terrain (see the before/after comparison below).</p>
+            <p>For this I used a software called Gratin, designed by a member of the team I was in. This software lets you connect nodes: each node takes some textures as input, executes a shader by sampling the textures and outputs a new one.</p>
+            <p>I encountered some bugs during this internship and one of them was particularly interesting, so I have also included the resulting image below.</p>
+            <a href="https://gitlab.inria.fr/vergne/gratin" title="Gratin repository" target="_blank" rel="noopener">Gratin repository</a>
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Inria internship media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-              <div class="slide"><img class="slide" src="misc/inria_internship/espace_killy.jpg" alt="before filter"/></div>
-              <div class="slide"><img class="slide" src="misc/inria_internship/espace_killy_render.jpg" alt="after filter"/></div>
-              <div class="slide"><img class="slide" src="misc/inria_internship/joli_bug.jpg" alt="joli bug"/></div>
+              <div class="slide"><img src="misc/inria_internship/espace_killy.jpg" loading="lazy" alt="Heightmap before filtering"/></div>
+              <div class="slide"><img src="misc/inria_internship/espace_killy_render.jpg" loading="lazy" alt="Heightmap after filtering"/></div>
+              <div class="slide"><img src="misc/inria_internship/joli_bug.jpg" loading="lazy" alt="An interesting bug encountered during the internship"/></div>
             </div>
           </section>
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
               <h1>Raymarching</h1>
-              <h6>2019 - 2021</h6>
+              <h6>2019 &mdash; 2021</h6>
             </div>
-            <p>During my "CPGE" (two years of study which act as an intensive preparatory course),
-              I've discovered that I could do things in 3D. Here are some of the projects I've made.
-            </p>
+            <p>During my "CPGE" (two years of study which act as an intensive preparatory course), I discovered that I could do things in 3D. Here are some of the projects I made:</p>
             <ul>
-              <li>A scene that can handle multiple lights with different colors as well as reflections in a fragment shader (on shadertoy).</li>
-              <li>An atmosphere simulation inspired by rayleight phenomenon (the planet is just a distorted sphere).</li>
+              <li>A scene that handles multiple lights with different colors as well as reflections, in a fragment shader (on Shadertoy).</li>
+              <li>An atmosphere simulation inspired by the Rayleigh phenomenon (the planet is just a distorted sphere).</li>
             </ul>
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Raymarching media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.jpg" alt="image rendered by this raytracer"/></div>
-            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.jpg" alt="image rendered by this raytracer"/></div>
-            <div class="slide"><img class="slide" Src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.jpg" alt="image rendered by this raytracer"/></div>
+              <div class="slide"><img src="misc/raymarching/Screenshot%20from%202022-11-04%2016-41-43.jpg" loading="lazy" alt="Raymarched scene with multiple lights"/></div>
+              <div class="slide"><img src="misc/raymarching/Screenshot%20from%202022-06-08%2017-01-32.jpg" loading="lazy" alt="Atmosphere simulation"/></div>
+              <div class="slide"><img src="misc/raymarching/Screenshot%20from%202022-06-08%2017-04-33.jpg" loading="lazy" alt="Atmosphere simulation, closer view"/></div>
             </div>
           </section>
 
         </div>
-      </div>
+      </article>
 
-      <div class="project" state="unfocused">
+      <article class="project" state="unfocused">
         <div class="project-descr">
           <div class="project-descr-text">
             <div class="header-container">
               <h1>Python projects</h1>
-              <h6>2018 - 2021</h6>
+              <h6>2018 &mdash; 2021</h6>
             </div>
-            <p>During my "CPGE" (two years of study which act as an intensive preparatory course),
-              I've made some python programs inspired by the courses.</p>
-
-            <p>Here is a list of some of those programs:<p>
+            <p>During my "CPGE" (two years of study which act as an intensive preparatory course), I made several Python programs inspired by my courses.</p>
+            <p>Here is a list of some of them:</p>
             <ul>
-              <li>An optimised(as much as python allows it) AES implementation.</li>
-              <li>A simulation of a charged particle in a tokamak with and without poloidal correction</li>
+              <li>An optimised (as much as Python allows) AES implementation.</li>
+              <li>A simulation of a charged particle in a tokamak, with and without poloidal correction.</li>
               <li>A display of an electrostatic field generated by charged particles.</li>
               <li>A simple tsunami simulation.</li>
               <li>An epidemic simulation.</li>
               <li>A labyrinth generator.</li>
-              <li>A program drawing shapes with moving sphere with constraints.</li>
+              <li>A program drawing shapes with moving spheres under constraints.</li>
             </ul>
-
           </div>
 
-          <section class="slider-wrapper">
-            <button class="slide-arrow slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow slide-arrow-next">
-              &#8250;
-            </button>
+          <section class="slider-wrapper" aria-label="Python projects media">
+            <button class="slide-arrow slide-arrow-prev" aria-label="Previous image">&#8249;</button>
+            <button class="slide-arrow slide-arrow-next" aria-label="Next image">&#8250;</button>
             <div class="slides-container">
-            <div class="slide"><img class="slide" src="misc/python/particlefield.gif" alt="image of a python project"/></div>
-            <div class="slide"><img class="slide" src="misc/python/spheres.gif" alt="image of a python project"/></div>
-            <div class="slide"><img class="slide" src="misc/python/tsunami.gif" alt="image of a python project"/></div>
-            <div class="slide"><img class="slide" src="misc/python/tokamak.jpg" alt="image of a python project"/></div>
+              <div class="slide"><img src="misc/python/particlefield.gif" loading="lazy" alt="Electrostatic field of charged particles"/></div>
+              <div class="slide"><img src="misc/python/spheres.gif" loading="lazy" alt="Moving spheres under constraints"/></div>
+              <div class="slide"><img src="misc/python/tsunami.gif" loading="lazy" alt="Tsunami simulation"/></div>
+              <div class="slide"><img src="misc/python/tokamak.jpg" loading="lazy" alt="Charged particle in a tokamak"/></div>
             </div>
           </section>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
 
     <div id="empty"></div>
 
-  </main>
+    <footer class="site-footer">
+      <nav aria-label="Social and contact">
+        <a href="https://github.com/BricePrs" target="_blank" rel="noopener" title="GitHub">GitHub</a>
+        <a href="mailto:brice.peres@gmail.com" title="Email">Email</a>
+      </nav>
+    </footer>
 
+  </main>
 </body>
 </html>

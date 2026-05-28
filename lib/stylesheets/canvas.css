@@ -1,11 +1,18 @@
 
-html {
-    cursor: none;
+/* Hide the native cursor only on devices that have a real pointer with hover.
+   On touch/coarse devices we leave the cursor alone (it is not even shown). */
+@media (hover: hover) and (pointer: fine) {
+    html.canvas-cursor-hidden {
+        cursor: none;
+    }
 }
 
 main {
     position: absolute;
     top: 90vh;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
 
 @media only screen and (hover: none) and (pointer: coarse){
@@ -28,4 +35,12 @@ main {
     width: 100vw;
     height: 100vh;
     z-index: -1;
+}
+
+/* Static fallback when WebGL is unavailable or the user prefers reduced motion */
+#my_Canvas.canvas-fallback {
+    background:
+        radial-gradient(1200px 800px at 30% 30%, #2a2a2a 0%, transparent 60%),
+        radial-gradient(900px 700px at 75% 70%, #221a1a 0%, transparent 65%),
+        #141414;
 }

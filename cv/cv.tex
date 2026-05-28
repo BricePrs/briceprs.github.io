@@ -1,0 +1,202 @@
+% =============================================================================
+% Brice Peres — Curriculum Vitae
+%
+% Compile with:
+%   latexmk -pdf cv.tex          (recommended — handles passes & cleanup)
+%   pdflatex cv.tex              (single pass; run twice to fix references)
+%   xelatex  cv.tex              (also works)
+%
+% All packages used here are part of a standard TeX Live / MiKTeX install.
+% Photo is loaded from ../misc/portraitBP.jpg (already in the repo).
+% =============================================================================
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[a4paper,top=0.9cm,bottom=0.9cm,left=1.1cm,right=1.1cm]{geometry}
+
+\usepackage[default,scale=0.92]{lato}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{paracol}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Colors --------------------------------------------------------
+\definecolor{accent}{HTML}{B22222}
+\definecolor{darkgray}{HTML}{2E2E2E}
+\definecolor{lightgray}{HTML}{6E6E6E}
+
+% ---------- Hyperlink style ----------------------------------------------
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent}
+
+% ---------- Layout defaults ----------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{0.9cm}
+\pagestyle{empty}
+\color{darkgray}
+
+% ---------- Section heading ----------------------------------------------
+\titleformat{\section}
+  {\color{accent}\Large\bfseries\scshape}
+  {}{0pt}{}[{\color{accent}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{6pt}{6pt}
+
+% ---------- Building blocks ----------------------------------------------
+% \cvevent{Title}{Subtitle}{Date}{Location}
+\newcommand{\cvevent}[4]{%
+  \par\vspace{3pt}%
+  {\bfseries\color{darkgray}#1}%
+  \ifblank{#2}{}{~\textcolor{lightgray}{\textbar{}~\textsc{\footnotesize #2}}}%
+  \par%
+  {\footnotesize\color{lightgray}#3\ifblank{#4}{}{~\textbar{}~#4}}\par%
+}
+
+% Tight bulleted list
+\newenvironment{cvitems}
+  {\begin{itemize}[leftmargin=12pt,itemsep=1pt,parsep=1pt,topsep=2pt,label=\textcolor{accent}{\footnotesize\faAngleRight}]}
+  {\end{itemize}}
+
+% Sidebar item: \sideitem{label}{value}
+\newcommand{\sideitem}[2]{\textbf{#1}\par{\small #2}\par\vspace{4pt}}
+
+% Sidebar contact line: \contactline{icon}{text}
+\newcommand{\contactline}[2]{\mbox{\textcolor{accent}{#1}\hspace{0.55em}#2}\par\vspace{2pt}}
+
+% Light divider between items
+\newcommand{\divider}{\par\vspace{1pt}{\color{lightgray!50}\rule{\linewidth}{0.4pt}}\par}
+
+% =============================================================================
+\begin{document}
+
+% --------------------------- HEADER ----------------------------------------
+\begin{minipage}[c]{0.74\textwidth}
+  {\fontsize{34}{38}\selectfont%
+   \textbf{\color{accent}Brice}~\textcolor{darkgray}{Peres}}\par
+  \vspace{4pt}
+  \textcolor{darkgray}{\large Computer Graphics \& Simulation Engineer}\par
+  \vspace{4pt}
+  {\color{accent}\rule{\linewidth}{1pt}}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.22\textwidth}
+  \raggedleft
+  \includegraphics[width=\linewidth]{../misc/portraitBP.jpg}
+\end{minipage}
+
+\vspace{8pt}
+
+% --------------------------- TWO COLUMNS -----------------------------------
+\columnratio{0.66}
+\begin{paracol}{2}
+
+% =========================== LEFT COLUMN ===================================
+\section{Experience}
+
+\cvevent{Inria \textsc{Elan} team}{PhD candidate -- numerical study of naturally-curved fibre assemblies}{Apr.\ 2026 -- present}{Grenoble, France}
+\begin{cvitems}
+\item Numerical modelling and simulation of bundles of naturally-curved fibres (continuation of the work below).
+\end{cvitems}
+
+\divider
+
+\cvevent{Inria \textsc{Elan} team}{Pre-PhD research intern -- tomographic hair-data filtering}{Sept.\ 2025 -- Mar.\ 2026}{Grenoble, France}
+\begin{cvitems}
+\item Designed filtering methods for tomographic acquisitions of human hair, in preparation of the PhD project.
+\end{cvitems}
+
+\divider
+
+\cvevent{Dassault Systèmes}{End-of-studies internship}{Sept.\ 2024 -- Mar.\ 2025}{Paris, France}
+\begin{cvitems}
+\item Worked on the performance of one of Dassault Systèmes' main 3D engines, alongside the rendering team.
+\end{cvitems}
+
+\divider
+
+\cvevent{Corys}{R\&D Intern -- Unreal Engine 5}{May 2023 -- Sept.\ 2023}{Grenoble, France}
+\begin{cvitems}
+\item Implemented real-time windscreen effects (rain, snow, dirt, cleaning) for a runtime train simulator on Unreal Engine~5 (HLSL).
+\item Worked in the R\&D team led by Alain Kocelniack.
+\end{cvitems}
+
+\divider
+
+\cvevent{Inria}{Research Intern -- GPU terrain filtering}{June 2022 -- July 2022}{Grenoble, France}
+\begin{cvitems}
+\item Designed a GPU height-map filtering algorithm for terrain generalisation (advisors: Joëlle Thollot, Romain Vergne).
+\end{cvitems}
+
+\section{Selected projects}
+
+\cvevent{Real-time soft-body simulation}{C++ / CUDA}{Dec.\ 2024}{}
+Spring-mass soft body accelerated on the GPU with CUDA.
+
+\divider
+
+\cvevent{Progressive raytracer}{C++ / OpenGL}{Dec.\ 2024}{}
+GPU raytracer with BVH traversal, shadows, reflections, refractions, environment maps and Cook--Torrance shading with a GGX microfacet distribution. Frame accumulation for progressive refinement.
+
+\divider
+
+\cvevent{Particle physics simulation}{C++}{May 2023}{}
+2D/3D simulation under gravity and a Lennard-Jones potential, with hand-written vector class and spatial data structures. Ran 8\,000 particles over 400\,000 steps in 20 minutes on a laptop.
+
+\divider
+
+\cvevent{Black Seas -- multiplayer naval game}{Rust / OpenGL, team of 5}{Feb.\ -- Apr.\ 2023}{}
+From-scratch engine; rendering, terrain, lighting, post-processing.
+
+\switchcolumn
+
+% =========================== RIGHT COLUMN ==================================
+\section{Contact}
+\contactline{\faEnvelope}{\href{mailto:brice.peres@gmail.com}{brice.peres@gmail.com}}
+\contactline{\faPhone}{+33\,6\,51\,64\,67\,60}
+\contactline{\faGlobe}{\href{https://briceprs.github.io}{\color{accent}\bfseries\underline{briceprs.github.io}}\,\textcolor{accent}{$\nearrow$}}
+\contactline{\faGithub}{\href{https://github.com/BricePrs}{BricePrs}}
+
+\section{Skills}
+
+\sideitem{Languages}{C++, Rust, C, Python, GLSL, HLSL}
+
+\sideitem{Graphics \& GPU}{OpenGL, CUDA, WebGL, Unreal Engine 5, Shadertoy}
+
+\sideitem{Tools}{Git, \LaTeX, Linux}
+
+\sideitem{Familiar}{Java, Shell, Assembly}
+
+\section{Languages}
+
+\sideitem{French}{Native}
+\sideitem{English}{C1 -- TOEFL 100\,pts}
+\sideitem{Japanese}{A1}
+
+\section{Education}
+
+\cvevent{ENSIMAG (M.Eng.)}{École nat. sup.\ d'informatique et de math.\ appl.\ -- Grenoble INP}{2021 -- 2024}{Grenoble, France}
+
+\divider
+
+\cvevent{Institute of Science Tokyo}{Academic exchange (formerly Tokyo Tech)}{Mar.\ -- Aug.\ 2024}{Tokyo, Japan}
+
+\divider
+
+\cvevent{Lycée Notre-Dame de Sion}{Classes préparatoires MPSI/MP}{2018 -- 2021}{Marseille, France}
+
+\section{Interests}
+
+\textbf{Climbing \& bouldering}\,---\,since 2011, with a few competitions.\par\vspace{4pt}
+Computer graphics, physically based rendering, real-time simulation, Shadertoy.
+
+\end{paracol}
+
+\end{document}

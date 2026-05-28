@@ -3,33 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Brice Peres</title>
+  <title>Brice Peres — Computer graphics & simulation</title>
   <meta name="author" content="Brice Peres">
+  <meta name="description" content="Personal website of Brice Peres — engineer interested in computer graphics, rendering, shaders and physics simulation.">
+  <meta name="theme-color" content="#191919">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://briceprs.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Brice Peres — Computer graphics & simulation">
+  <meta property="og:description" content="Engineer interested in computer graphics, rendering, shaders and physics simulation.">
+  <meta property="og:url" content="https://briceprs.github.io/">
+  <meta property="og:image" content="https://briceprs.github.io/misc/portraitBP.jpg">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preload" href="fonts/Raleway-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="lib/stylesheets/default.css"/>
   <link rel="stylesheet" href="lib/stylesheets/canvas.css"/>
   <script src="lib/scripts/menu.js" defer></script>
   <script src="lib/scripts/simple_cube.js" defer></script>
-
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
   <header>
     <div id="top-bar">
-      <a href="index.html?reload=RELOAD_ON_SAVE" title="Home page" id="home-button">Brice Peres</a>
-      <input id="nav-list" type="image" name="List Icon" src="misc/list_icon.png" alt="list_icon"/>
+      <a href="index.html" title="Home page" id="home-button">Brice Peres</a>
+      <button id="nav-list" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav">
+        <span class="nav-bar"></span>
+        <span class="nav-bar"></span>
+        <span class="nav-bar"></span>
+      </button>
     </div>
-    <nav id="nav" state="start">
-      <a href="projects.html?reload=RELOAD_ON_SAVE" title="Show projects">Projects</a>
-      <a href="about.html?reload=RELOAD_ON_SAVE" title="Show about">About</a>
+    <nav id="nav" state="start" aria-label="Primary">
+      <a href="projects.html" title="Show projects">Projects</a>
+      <a href="about.html" title="Show about">About</a>
     </nav>
   </header>
 
-  <main>
-    <canvas id="my_Canvas">
-        <p>Hey, this is a test paragraph !</p>
-      </canvas>
+  <main id="main-content">
+    <canvas id="my_Canvas" aria-hidden="true">
+      <p>Your browser does not display the interactive background animation, but you can still browse the site through the menu above.</p>
+    </canvas>
+    <noscript>
+      <p style="color:#eae0eb;text-align:center;padding:6rem 1rem;">
+        This site uses JavaScript for its interactive background. Use the menu above to visit
+        <a href="projects.html" style="color:#ef4040">Projects</a> or
+        <a href="about.html" style="color:#ef4040">About</a>.
+      </p>
+    </noscript>
+
+    <footer class="site-footer">
+      <nav aria-label="Social and contact">
+        <a href="https://github.com/BricePrs" target="_blank" rel="noopener" title="GitHub">GitHub</a>
+        <a href="mailto:brice.peres@gmail.com" title="Email">Email</a>
+      </nav>
+    </footer>
   </main>
-  <footer>
-  </footer>
 </body>
 </html>

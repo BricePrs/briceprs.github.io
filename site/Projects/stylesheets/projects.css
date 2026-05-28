@@ -1,25 +1,11 @@
-
-@font-face {
-  font-family: Raleway;
-  src: url("../../../fonts/Raleway-Regular.ttf") format("truetype");
-}
-
-
-
 html {
     background-color: #191919;
-    font-size: 15px;
     font-family: Raleway, serif;
-}
-
-@media screen and (max-width: 500px) {
-     html {
-        font-size: 11px;
-    }
 }
 
 body {
     all: unset;
+    display: block;
 }
 
 main {
@@ -36,16 +22,27 @@ main {
 
 .project {
     background-color: #202020BB;
-    max-width: 60%;
-    min-width: max(calc(60%), 330px);
-    padding: 1rem 1rem 1rem 1rem;
-    margin: 1rem 1rem 1rem 1rem;
-    border-style: solid;
-    border-radius: 3px;
-    border-color: #202020BB;
-    border-width: 2px;
-    transition: 500ms;
-    #overflow: scroll;
+    width: 100%;
+    max-width: 900px;
+    padding: 1rem;
+    margin: 1rem;
+    border: 2px solid #202020BB;
+    border-radius: 6px;
+    transition: border-color 300ms ease, background-color 300ms ease, transform 300ms ease;
+}
+
+@media screen and (max-width: 600px) {
+    .project {
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+    }
+    .project-descr {
+        padding: 0.5rem !important;
+    }
+    .slider-wrapper {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
 
 
@@ -54,16 +51,17 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
     column-gap: 4%;
+    row-gap: 0.25rem;
+    align-items: baseline;
 }
 
-.project:hover {
-    border-style: solid;
-    border-radius: 3px;
-    border-width: 2px;
+.project:hover,
+.project:focus-within {
     border-color: #ec6957;
-    transition: 300ms;
     background-color: #191919;
+    transform: translateY(-2px);
     cursor: default;
 }
 
@@ -167,13 +165,12 @@ main {
  */
 
 .project img {
-    max-width: 60%;
+    max-width: 100%;
     max-height: 100%;
-    min-width: min(500px, 95%);
     width: auto;
     height: auto;
-
     margin: auto;
+    display: block;
 }
 
 .project * a {
@@ -220,91 +217,142 @@ main {
 
 
 
+/* ===================== Image carousel ===================== */
 .slider-wrapper {
-    margin-left: 20%;
-    margin-right: 20%;
     position: relative;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: min(1000px, 100%);
+    border-radius: 6px;
     overflow: hidden;
-    max-width: min(1000px, 95%);
-    max-height: 20%;
-    min-width: min(500px, 95%);
-    width: auto;
-    height: auto;
+    background: #0d0d0d;
 }
 
 .slides-container {
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  overflow: scroll;
-  scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0;
+    padding: 0;
 }
-
-.slides-container img {
-    margin: 0 0 0 0;
-}
-
-.slide-arrow {
-  position: absolute;
-  display: flex;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  height: 3rem;
-  background-color: #3a3a3a;
-  border: none;
-  width: 2rem;
-  font-size: 2rem;
-  padding: 0;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 100ms;
-}
-
-.slide-arrow:hover {
-  opacity: 1;
-}
-
-.slide-arrow-prev {
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding-left: 0.25rem;
-  border-radius: 1rem;
-  touch-action: manipulation;
-}
-
-.slide-arrow-next {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding-left: 0.75rem;
-  border-radius: 1rem;
-  touch-action: manipulation;
+.slides-container::-webkit-scrollbar {
+    display: none;
 }
 
 .slide {
-  width: 100%;
-  height: 100%;
-  flex: 1 0 100%;
-  text-align: center;
-  vertical-align: middle;
+    flex: 0 0 100%;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-.slides-container {
-    scrollbar-width: none;
-    text-align: center;
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin: 0;
+    display: block;
 }
 
-.slides-container::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+/* Arrows: pill-shaped, fade in on hover/focus */
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgba(20, 20, 20, 0.6);
+    color: #f5f5f5;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 180ms ease, background-color 180ms ease, transform 120ms ease;
+    z-index: 2;
+}
+.slider-wrapper:hover .slide-arrow,
+.slider-wrapper:focus-within .slide-arrow {
+    opacity: 0.9;
+}
+.slide-arrow:hover,
+.slide-arrow:focus-visible {
+    opacity: 1;
+    background-color: rgba(20, 20, 20, 0.92);
+}
+.slide-arrow:active {
+    transform: translateY(-50%) scale(0.94);
+}
+.slide-arrow-prev { left: 0.6rem; }
+.slide-arrow-next { right: 0.6rem; }
+
+/* On touch devices, keep arrows visible (no hover) */
+@media (hover: none) {
+    .slide-arrow { opacity: 0.85; }
+}
+
+/* Dot indicators */
+.slide-dots {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.4rem;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.55);
+    z-index: 2;
+}
+.slide-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background-color 180ms ease, width 180ms ease;
+}
+.slide-dot:hover { background: rgba(255, 255, 255, 0.6); }
+.slide-dot.is-active {
+    background: #ec6957;
+    width: 18px;
+    border-radius: 4px;
+}
+
+/* Single-image carousels: hide controls entirely */
+.slider-wrapper[data-single] .slide-arrow,
+.slider-wrapper[data-single] .slide-dots {
+    display: none;
+}
+
+/* Slide counter shown briefly on the wrapper (e.g. "3 / 7") */
+.slide-counter {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.55);
+    color: #f5f5f5;
+    font-size: 0.85rem;
+    z-index: 2;
+    pointer-events: none;
 }
 
 

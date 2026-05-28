@@ -1,0 +1,144 @@
+% =============================================================================
+% Brice Peres — Curriculum Vitae (minimalist single-column version)
+%
+% Compile with:  latexmk -pdf cv-simple.tex   (or pdflatex cv-simple.tex)
+% Uses only packages from a standard TeX Live / MiKTeX install.
+% =============================================================================
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=1.5cm,top=1.2cm,bottom=1.2cm]{geometry}
+
+\usepackage[default,scale=0.95]{lato}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+% --- Single accent color — change this one line to retune the whole CV -----
+\definecolor{accent}{HTML}{A80027}
+
+\definecolor{muted}{HTML}{6E6E6E}
+
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent}
+
+% Big, obviously-clickable website link
+\newcommand{\website}[1]{%
+  \href{https://#1}{%
+    \color{accent}\bfseries\underline{#1}\,$\nearrow$%
+  }%
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\color{black!90}
+
+% ---- Section headings: bold + thin accent-colored rule -------------------
+\titleformat{\section}
+  {\large\bfseries}
+  {}{0pt}{}[{\color{accent}\titlerule[1pt]}\vspace{-2pt}]
+\titlespacing*{\section}{0pt}{5pt}{6pt}
+
+% ---- \role{Title}{Detail}{Dates}{Location} ---------------------------------
+\newcommand{\role}[4]{%
+  \vspace{3pt}%
+  \textbf{#1}\hfill\textbf{#3}\par
+  {\color{muted}\textit{#2}\hfill\textit{#4}}\par
+}
+
+\newenvironment{tasks}
+  {\begin{itemize}[leftmargin=14pt,itemsep=1pt,parsep=1pt,topsep=2pt,label={\color{accent}\textbullet}]}
+  {\end{itemize}}
+
+% =============================================================================
+\begin{document}
+
+% ---------- HEADER ----------------------------------------------------------
+\noindent
+\begin{minipage}[c]{0.78\textwidth}
+  {\LARGE\bfseries Brice Peres}\\[3pt]
+  {\normalsize\color{muted}Computer Graphics \& Simulation Engineer}\\[6pt]
+  {\small
+    \href{mailto:brice.peres@gmail.com}{brice.peres@gmail.com}
+    ~~{\color{accent}\textbullet}~~ +33\,6\,51\,64\,67\,60
+    ~~{\color{accent}\textbullet}~~ \href{https://github.com/BricePrs}{github.com/BricePrs}\\[3pt]
+    \faGlobe\ Portfolio: \website{briceprs.github.io}
+  }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.18\textwidth}
+  \raggedleft
+  \includegraphics[width=\linewidth]{../misc/portraitBP.jpg}
+\end{minipage}
+
+% ---------- EXPERIENCE ------------------------------------------------------
+\section{Experience}
+
+\role{Inria \textsc{Elan} team -- PhD candidate}{Numerical study of naturally-curved fibre assemblies}{Apr.\ 2026 -- present}{Grenoble, France}
+\begin{tasks}
+\item Numerical modelling and simulation of bundles of naturally-curved fibres (continuation of the work below).
+\end{tasks}
+
+\role{Inria \textsc{Elan} team -- Pre-PhD research intern}{Tomographic hair-data filtering}{Sept.\ 2025 -- Mar.\ 2026}{Grenoble, France}
+\begin{tasks}
+\item Designed filtering methods for tomographic acquisitions of human hair, in preparation of the PhD project.
+\end{tasks}
+
+\role{Dassault Systèmes -- End-of-studies intern}{3D engine performance optimisation}{Sept.\ 2024 -- Mar.\ 2025}{Paris, France}
+\begin{tasks}
+\item Worked with the rendering team to improve the performance of one of Dassault Systèmes' main 3D engines.
+\end{tasks}
+
+\role{Corys -- R\&D intern}{Unreal Engine 5, runtime train simulator}{May 2023 -- Sept.\ 2023}{Grenoble, France}
+\begin{tasks}
+\item Implemented real-time windscreen effects (rain, snow, dirt, cleaning) on Unreal Engine~5 (HLSL).
+\item Worked in the R\&D team led by Alain Kocelniack.
+\end{tasks}
+
+\role{Inria -- Research intern}{GPU terrain filtering}{June -- July 2022}{Grenoble, France}
+\begin{tasks}
+\item Designed a GPU height-map filtering algorithm for terrain generalisation (advisors: Joëlle Thollot, Romain Vergne).
+\end{tasks}
+
+% ---------- PROJECTS --------------------------------------------------------
+\section{Selected projects}
+
+\role{Real-time soft-body simulation}{C++, CUDA}{Dec.\ 2024}{}
+Spring-mass soft body accelerated on the GPU with CUDA.
+
+\role{Progressive raytracer}{C++, OpenGL}{Dec.\ 2024}{}
+GPU raytracer with BVH traversal, shadows, reflections, refractions and environment maps. Cook--Torrance shading with a GGX microfacet distribution; frame accumulation for progressive refinement.
+
+\role{Particle physics simulation}{C++}{May 2023}{}
+2D/3D simulation under gravity and a Lennard-Jones potential with custom spatial data structures. Ran 8\,000 particles over 400\,000 steps in 20 minutes on a laptop.
+
+\role{Black Seas -- multiplayer naval game}{Rust, OpenGL -- team of 5}{Feb.\ -- Apr.\ 2023}{}
+From-scratch engine; rendering, terrain, lighting, post-processing (ray-marched clouds, bloom, tonemapping).
+
+% ---------- EDUCATION -------------------------------------------------------
+\section{Education}
+
+\role{ENSIMAG -- Engineering degree (M.Eng.), Grenoble INP}{Computer science and applied mathematics}{2021 -- 2024}{Grenoble, France}
+
+\role{Institute of Science Tokyo (formerly Tokyo Tech)}{Academic exchange semester}{Mar.\ -- Aug.\ 2024}{Tokyo, Japan}
+
+\role{Lycée Notre-Dame de Sion -- Classes préparatoires MPSI/MP}{Two-year intensive course for French engineering school exams}{2018 -- 2021}{Marseille, France}
+
+% ---------- SKILLS & MISC ---------------------------------------------------
+\section{Skills, languages \& interests}
+
+\textbf{Languages.} C++, Rust, C, Python, GLSL, HLSL\\[1pt]
+\textbf{Graphics \& GPU.} OpenGL, CUDA, WebGL, Unreal Engine~5, Shadertoy\\[1pt]
+\textbf{Tools.} Git, \LaTeX, Linux \quad{\color{accent}\textbullet}\quad \textbf{Familiar.} Java, Shell, Assembly\\[1pt]
+\textbf{Spoken.} French (native) {\color{accent}\textbullet} English (C1, TOEFL 100\,pts) {\color{accent}\textbullet} Japanese (A1)\\[1pt]
+\textbf{Interests.} Climbing \& bouldering since 2011 (a few competitions); computer graphics, physically based rendering, real-time simulation, Shadertoy.
+
+\end{document}
