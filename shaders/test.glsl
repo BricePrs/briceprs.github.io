@@ -45,10 +45,11 @@ vec3 swap_spark_vec3(vec3 a, vec3 b, float anim_time, float swp_time, float swap
     , smoothstep(spark_swp_time-delta_time, spark_swp_time, anim_time));
 }
 
-vec3 project_onto_torus(vec3 p) {
+vec3 project_onto_torus(vec3 p, float pert) {
    vec3 pp = vec3(p.x, 0, p.z);
    pp = normalize(pp);
-   return pp+0.3*normalize(p-pp);
+   vec3 noise = sin(p * pert * 10.);
+   return pp+0.3*(normalize(p-pp) + noise);
 }
 
 vec3 dust_cloud(vec3 vertex_pos, float anim_time) {
@@ -86,7 +87,7 @@ vec3 weird_circle(vec3 vertex_pos, float anim_time) {
 
 
 vec3 torus(vec3 vertex_pos, float anim_time) {
-    vec3 torus_pos = project_onto_torus(vertex_pos * 1.8);
+    vec3 torus_pos = project_onto_torus(vertex_pos * 1.8, anim_time);
     torus_pos.yz *= rotate(20. * anim_time);
     torus_pos.xy *= rotate(14. * anim_time * 0.2 + time * 0.1);
     return torus_pos*.35+vec3(0, 0, -0.5);
