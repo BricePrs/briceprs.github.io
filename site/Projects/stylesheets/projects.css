@@ -3,11 +3,6 @@ html {
     font-family: Raleway, serif;
 }
 
-body {
-    all: unset;
-    display: block;
-}
-
 main {
     z-index: -1;
 }
@@ -101,9 +96,6 @@ main {
 */
 
 
-#empty {
-    height: 100vh;
-}
 
 .project h1 {
     color: #faf8f4;

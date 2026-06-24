@@ -3,6 +3,12 @@ header {
     position: static;
 }
 
+/* About page lets the header sit inline (not fixed); main therefore needs
+   no padding-top to clear it. */
+main {
+    padding-top: 0 !important;
+}
+
 .column-div {
     position: relative;
     top: 30px;
@@ -79,10 +85,8 @@ header {
 * {
     font-family: Raleway, serif;
 }
-body {
-    all: unset;
-    display: block;
-}
+/* Body layout (flex column for sticky footer) is set in default.css —
+   nothing extra needed here. */
 
 .school-list {
     position: relative;
@@ -167,9 +171,6 @@ body {
     border: 3px solid #2a2a2a;
 }
 
-#empty {
-    height: 50px;
-}
 
 p {
     font-size: 1.2rem;

@@ -7,26 +7,9 @@
     }
 }
 
-main {
-    position: absolute;
-    top: 90vh;
-    left: 0;
-    right: 0;
-    width: 100%;
-}
-
-@media only screen and (hover: none) and (pointer: coarse){
-    body {
-        all: unset;
-    }
-
-    main {
-        position: absolute;
-        top: 80px;
-        z-index: -1;
-        height: 600vh;
-    }
-}
+/* Main layout (sticky-footer + header clearance) lives in default.css.
+   Nothing extra needed here for the canvas pages — the canvas itself is
+   position: fixed below, acting as a full-screen background. */
 
 #my_Canvas {
     position: fixed;
