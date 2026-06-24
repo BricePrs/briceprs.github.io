@@ -260,37 +260,6 @@ button {
     -webkit-filter: invert(1) grayscale(1);
 }
 
-/* Site footer (small, unobtrusive) */
-.site-footer {
-    flex-shrink: 0;            /* never shrink — keeps footer on the page */
-    position: relative;
-    z-index: 4;
-    padding: 1rem 1.2rem;
-    text-align: center;
-    color: var(--color-muted);
-    font-size: 0.9rem;
-}
-.site-footer nav {
-    display: inline-flex;
-    gap: 1rem;
-    justify-content: center;
-}
-.site-footer a {
-    color: var(--color-muted);
-    text-decoration: none;
-    background: none;
-    -webkit-text-fill-color: currentColor;
-    padding: 4px 8px;
-    border-radius: 6px;
-    transition: color .2s ease, background-color .2s ease;
-    font-size: 0.95rem;
-    margin: 0;
-}
-.site-footer a:hover {
-    color: var(--color-accent);
-    background: rgba(255,255,255,0.04);
-}
-
 /* Reduced motion: turn off non-essential animations */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
